@@ -14,16 +14,11 @@
 
 TARGET = sim
 
-all: clang
+all: $(TARGET)
 
-clang: CC = clang++
-clang: $(TARGET)
-
-gcc: CC = gcc
-gcc: $(TARGET)
-
-CFLAGS = -Wall -Wextra -Werror -march=native -mtune=native $(DEBUG_FLAGS)
-LINT   = clang-tidy
+CC        = clang++
+CFLAGS    = -Wall -Wextra -Werror -march=native -mtune=native $(DEBUG_FLAGS)
+LINT      = clang-tidy
 LINTFLAGS = --quiet
 
 debug: DEBUG_FLAGS = -g -DDEBUG -O0

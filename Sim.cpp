@@ -10,8 +10,14 @@
 
 #include <iostream>
 
+#include "Sim.h"
+
+
 using namespace std;
 
+/// Entry point for the program
+///
+/// @return The return value for the program
 int main() {
    cout << "Simulation\n";
    
