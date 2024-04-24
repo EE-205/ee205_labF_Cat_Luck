@@ -37,6 +37,7 @@ BOOST_AUTO_TEST_SUITE( test_Game )
       BOOST_CHECK_THROW( Game::validateDraws( MAX_BALLS + 1, MAX_DRAWS ), invalid_argument );
    }
 
+   /// No tests for validateTickets (for now)
 
 BOOST_AUTO_TEST_SUITE_END()
 
