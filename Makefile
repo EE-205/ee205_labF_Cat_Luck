@@ -48,6 +48,9 @@ doc: $(TARGET)
 	doxygen .doxygen/Doxyfile
 
 test: $(TARGET)
+	cd tests ; $(MAKE) test
+
+run: $(TARGET)
 	./$(TARGET)
 
 valgrind: $(TARGET)
@@ -60,3 +63,4 @@ valgrind: $(TARGET)
 
 clean:
 	rm -fr $(TARGET) *.o .doxygen/docs
+	cd tests ; $(MAKE) clean 

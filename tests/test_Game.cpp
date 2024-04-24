@@ -20,12 +20,23 @@ using namespace std;
 
 BOOST_AUTO_TEST_SUITE( test_Game )
 
-   BOOST_AUTO_TEST_CASE( test_Constructor ) {
-      BOOST_CHECK_THROW( Game( MIN_BALLS - 1, 10, 10 ), invalid_argument );
-      BOOST_CHECK_NO_THROW( Game( MIN_BALLS, 10, 10 ) );
-      BOOST_CHECK_NO_THROW( Game( MAX_BALLS, 10, 10 ) );
-      BOOST_CHECK_THROW( Game( MAX_BALLS + 1, 10, 10 ), invalid_argument );
+   BOOST_AUTO_TEST_CASE( test_validateBalls ) {
+      BOOST_CHECK_THROW( Game::validateBalls( MIN_BALLS - 1 ), invalid_argument );
+      BOOST_CHECK_NO_THROW( Game::validateBalls( MIN_BALLS ) );
+      BOOST_CHECK_NO_THROW( Game::validateBalls( MAX_BALLS ) );
+      BOOST_CHECK_THROW( Game::validateBalls( MAX_BALLS +1 ), invalid_argument );
    }
+   
+   BOOST_AUTO_TEST_CASE( test_validateDraws ) {
+      BOOST_CHECK_THROW( Game::validateDraws( MIN_BALLS-1, MIN_BALLS-1 ), invalid_argument );
+      BOOST_CHECK_THROW( Game::validateDraws( 5, 6 ), invalid_argument );
+      BOOST_CHECK_NO_THROW( Game::validateDraws( MIN_BALLS, MIN_BALLS ) );
+      BOOST_CHECK_NO_THROW( Game::validateDraws( MAX_BALLS, MIN_BALLS ) );
+      BOOST_CHECK_NO_THROW( Game::validateDraws( MAX_BALLS, MAX_DRAWS ) );
+      BOOST_CHECK_THROW( Game::validateDraws( MAX_BALLS, MAX_DRAWS+1 ), invalid_argument );
+      BOOST_CHECK_THROW( Game::validateDraws( MAX_BALLS + 1, MAX_DRAWS ), invalid_argument );
+   }
+
 
 BOOST_AUTO_TEST_SUITE_END()
 

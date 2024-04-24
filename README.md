@@ -20,7 +20,8 @@ This simulation uses the following `Makefile` targets:
 | Command        | Purpose                                                   |
 |----------------|-----------------------------------------------------------|
 | `make`         | Compile (with clang++)                                    |
-| `make test`    | Compile and run it                                        |
+| `make run`     | Compile and run it                                        |
+| `make test`    | Compile and do a Boost unit test on it                    |
 | `make debug`   | Compile with debug mode ( `DEBUG` is defined)             |
 | `make clean`   | Remove all compiler-generated files                       |
 | `make doc`     | Make a Doxygen website                                    |
