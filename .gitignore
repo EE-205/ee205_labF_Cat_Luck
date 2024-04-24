@@ -191,6 +191,10 @@ Doxyfile.bak
 .doxygen/Doxy_version.in
 .doxygen/docs/
 
+### Ignore Boost Tests
+tests/*.o
+tests/boost_tests
+
 
 # Additional exclusions ######################################################
 # ############################################################################

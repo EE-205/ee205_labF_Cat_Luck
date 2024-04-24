@@ -8,6 +8,9 @@
 /// @author TODO <TODO@hawaii.edu>
 ///////////////////////////////////////////////////////////////////////////////
 
+#include <cstdint>  // For uint8_t
+
+
 class Draw {
-   
+private:
 };
