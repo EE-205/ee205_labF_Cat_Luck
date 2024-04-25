@@ -1,9 +1,11 @@
 ///////////////////////////////////////////////////////////////////////////////
-//   University of Hawaii, College of Engineering
-//   Lab D - Lucky Cat - EE 205 (Object Oriented Programming) - Spr 2024
+//  University of Hawaii, College of Engineering
+//  Lab D - Lucky Cat - EE 205 (Object Oriented Programming) - Spr 2024
 //
-//   Cats make their own luck
+//  Cats make their own luck
 //
+/// Define the Draw class
+///
 /// @file   Draw.cpp
 /// @author TODO <TODO@hawaii.edu>
 ///////////////////////////////////////////////////////////////////////////////

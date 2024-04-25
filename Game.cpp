@@ -1,9 +1,11 @@
 ///////////////////////////////////////////////////////////////////////////////
-//   University of Hawaii, College of Engineering
-//   Lab D - Lucky Cat - EE 205 (Object Oriented Programming) - Spr 2024
+//  University of Hawaii, College of Engineering
+//  Lab D - Lucky Cat - EE 205 (Object Oriented Programming) - Spr 2024
 //
-//   Cats make their own luck
+//  Cats make their own luck
 //
+/// Define the Game class
+///
 /// @file   Game.cpp
 /// @author TODO <TODO@hawaii.edu>
 ///////////////////////////////////////////////////////////////////////////////
@@ -54,7 +56,7 @@ bool Game::validateDraws( const uint8_t newBalls, const uint8_t newDraws ) {
 
 /// Validate the number of tickets in the Game
 ///
-/// This is actually bounds-checked by the datatype... The minimum number is 
+/// This is actually bounds-checked by the datatype... The minimum number is
 /// 0 and the maximum number is ULONG_MAX.
 ///
 /// @param newTickets The proposed number of tickets issued in this Game
@@ -79,4 +81,23 @@ Game::Game( const uint8_t newBalls, const uint8_t newDraws, const unsigned long 
    if( validateTickets( newTickets ) ) {
       tickets = newTickets;
    }
+}
+
+
+/// Validate the internal state of the Game
+///
+/// @return `true` if the state is valid.  If not, throw an exception.
+bool Game::validate() const {
+   validateBalls( balls );
+   validateDraws( balls, draws );
+   validateTickets( tickets );
+
+   return true;
+}
+
+
+/// Print the internal state of the Game
+void Game::dump() const {
+      PRINT_CLASS_FOR_DUMP;
+      FORMAT_LINE_FOR_DUMP( "Game", "balls" )  << balls  << std::endl ;
 }

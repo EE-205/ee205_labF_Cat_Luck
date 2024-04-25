@@ -1,9 +1,11 @@
 ///////////////////////////////////////////////////////////////////////////////
-//   University of Hawaii, College of Engineering
-//   Lab D - Lucky Cat - EE 205 (Object Oriented Programming) - Spr 2024
+//  University of Hawaii, College of Engineering
+//  Lab D - Lucky Cat - EE 205 (Object Oriented Programming) - Spr 2024
 //
-//   Cats make their own luck
+//  Cats make their own luck
 //
+/// Declare the Game class
+///
 /// @file   Game.h
 /// @author TODO <TODO@hawaii.edu>
 ///////////////////////////////////////////////////////////////////////////////
@@ -13,6 +15,7 @@
 #include <cstdint>    // For uint8_t
 #include <stdexcept>  // For invalid_argument
 
+#include "config.h"
 
 using namespace std;
 
@@ -37,7 +40,7 @@ private:
    uint8_t       balls;    ///< The number of balls in this Game
    uint8_t       draws;    ///< The number of balls retrieved in each draw
    unsigned long tickets;  ///< The number of customers who buy a lottery ticket
-   
+
 
 public:  // ///////////////////////// Static Methods ///////////////////////////
    static bool validateBalls( uint8_t newBalls );
@@ -47,5 +50,9 @@ public:  // ///////////////////////// Static Methods ///////////////////////////
 
 public:  // /////////////////// Constructors & Destructors /////////////////////
    Game( uint8_t newBalls, uint8_t newDraws, unsigned long newTickets );
+
+public:  // ///////////////////////// Public Methods ///////////////////////////
+   bool validate() const;
+   void dump() const;
 
 };

@@ -1,8 +1,8 @@
 ///////////////////////////////////////////////////////////////////////////////
-//   University of Hawaii, College of Engineering
-//   Lab D - Lucky Cat - EE 205 (Object Oriented Programming) - Spr 2024
+//  University of Hawaii, College of Engineering
+//  Lab D - Lucky Cat - EE 205 (Object Oriented Programming) - Spr 2024
 //
-//   Cats make their own luck
+//  Cats make their own luck
 //
 /// Comprehensive test of the Game class
 ///
@@ -26,7 +26,7 @@ BOOST_AUTO_TEST_SUITE( test_Game )
       BOOST_CHECK_NO_THROW( Game::validateBalls( MAX_BALLS ) );
       BOOST_CHECK_THROW( Game::validateBalls( MAX_BALLS +1 ), invalid_argument );
    }
-   
+
    BOOST_AUTO_TEST_CASE( test_validateDraws ) {
       BOOST_CHECK_THROW( Game::validateDraws( MIN_BALLS-1, MIN_BALLS-1 ), invalid_argument );
       BOOST_CHECK_THROW( Game::validateDraws( 5, 6 ), invalid_argument );
@@ -37,7 +37,14 @@ BOOST_AUTO_TEST_SUITE( test_Game )
       BOOST_CHECK_THROW( Game::validateDraws( MAX_BALLS + 1, MAX_DRAWS ), invalid_argument );
    }
 
-   /// No tests for validateTickets (for now)
+   BOOST_AUTO_TEST_CASE( test_validateTickets ) {
+      /// No tests for validateTickets (for now)
+   }
+
+   BOOST_AUTO_TEST_CASE( test_validateDump ) {
+      Game aGame( 16, 8, 1000 );
+      aGame.dump();
+   }
 
 BOOST_AUTO_TEST_SUITE_END()
 
