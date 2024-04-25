@@ -13,6 +13,8 @@
 
 #include "Game.h"
 
+using namespace std;
+
 
 /// Validate the number of balls in this Game
 ///
@@ -97,7 +99,18 @@ bool Game::validate() const {
 
 
 /// Print the internal state of the Game
+///
+/// @todo balls & draws are not printing
+///
+///     Object              class               Game                                    
+///     Object              this                0x7ffc6260c718                          
+///     Game                balls               16                                
+///     Game                draws               8                                   
+///     Game                tickets             1000  
+///
 void Game::dump() const {
-      PRINT_CLASS_FOR_DUMP;
-      FORMAT_LINE_FOR_DUMP( "Game", "balls" )  << balls  << std::endl ;
+      PRINT_CLASS_FOR_DUMP();
+      FORMAT_LINE_FOR_DUMP( "Game", "balls" )   << balls    << std::endl ;
+      FORMAT_LINE_FOR_DUMP( "Game", "draws" )   << draws    << std::endl ;
+      FORMAT_LINE_FOR_DUMP( "Game", "tickets" ) << tickets  << std::endl ;
 }
