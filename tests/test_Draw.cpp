@@ -27,11 +27,13 @@ BOOST_AUTO_TEST_SUITE( test_Draw )
 
    BOOST_AUTO_TEST_CASE( test_getRandom8 ) {
       for( int i = 1 ; i < 10 ; i++ ) {
-         printf( "i=%d  ", i );
-         for( int j = i ; j < 10 ; j++ ) {
-            printf( "%3u ", Draw::getRandom8( i ) );
+//       printf( "i=%d  ", i );
+         int max_test = i * 10;
+         for( int j = 0 ; j < max_test ; j++ ) {
+//          printf( "%3u ", Draw::getRandom8( i ) );
+            BOOST_CHECK_LT( Draw::getRandom8( i ), i );
          }
-         puts( "\n" );
+//       puts( "" );
       }
    }
 

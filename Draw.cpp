@@ -41,22 +41,19 @@ Draw::Draw( const Game& newGame ) : game( newGame ) {
 }
 
 
-/// Get a random number (`static inline`)
+/// Get a random number from 0 to the number of balls in the Lottery
 ///
-/// @return A 8-bit random number
+/// @param balls The number of balls in the Game
+///
+/// @return An 8-bit random number
 uint8_t Draw::getRandom8( uint8_t balls ) {
    uint8_t rval;
 
    asm volatile (
-
-//"rdrand rax;"
-"rdrand rcx;"
-"div bl;"
-   
        "try_again:"
-       "rdrand ax;"          /// If CF==0, then the rdrand failed... try again
+       "rdrand ax;"           /// If CF==0, then the rdrand failed... try again
        "jnc    try_again;"
-     "mov    ax, 52;"
+       "AND    ax, 0x00FF;"   // Ensure the random number is <= 255
        "mov    cl, %[balls];"
        "div    cl;"
        "mov    %[rval], ah;"
