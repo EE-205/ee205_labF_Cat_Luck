@@ -36,8 +36,6 @@ public:  // ///////////////////////// Static Methods ///////////////////////////
    static uint8_t getRandom8( uint8_t balls );
 
 
-
-
 public:  // /////////////////// Constructors & Destructors /////////////////////
    Draw( const Game& newGame );
 

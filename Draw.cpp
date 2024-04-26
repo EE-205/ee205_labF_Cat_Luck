@@ -29,15 +29,38 @@ Draw::Draw( const Game& newGame ) : game( newGame ) {
    draw.g8[1] = 0;
 
    /// The fun of this function is how to efficiently and correctly generate
-   /// a sorted set of numbers
+   /// a sorted set of numbers.  We will use a radix sort to select a set of
+   /// balls out of a pool.
 
    alignas( 8 ) uint8_t pool[ MAX_BALLS ];  ///< Numbers to draw from
-   memset( pool, 0, sizeof( pool ) ); // Turn them all "Off"
+   memset( pool, 0, sizeof( pool ) );       //   0 means they number/ball is in the pool
 
+   uint8_t balls = newGame.getBalls();
+//printf( "===\n" );
    for( int i = 0 ; i < game.getDraws() ; i++ ) {
-//      uint8_t r = (uint8_t) 
+      /// - Get a random index into the pool
+      /// - If that index has been drawn (pool[r] != 0, iterate forward (and
+      ///   wrap if necessary) until we find an unused number.
+      uint8_t r = getRandom8( balls );
+//printf( "r %d  ", r );
+
+      while( pool[ r ] != 0 ) {
+//printf( "pool[%d]=%d  ", r, pool[r] );
+         r = ( (r+1) >= balls ) ? 0 : (r + 1);
+//printf( "rrr %d  ", r );
+      }
+      assert( pool[r] == 0 );
+      pool[ r ] = 1;
+//printf( "DDD %d  balls=%d\n", r, balls );
    }
 
+   int found = 0;
+   for( int ball = 0 ; ball < game.getBalls() ; ball++ ) {
+      if( pool[ ball ] != 0 ) {
+         draw.each[ found ] = ball;
+         found++;
+      }
+   }
 }
 
 
@@ -84,6 +107,23 @@ bool Draw::validate_static() {
 /// @return `true` if the state is valid.  If not, throw an exception.
 bool Draw::validate() const {
    game.validate();
+   
+   int draws = game.getDraws();
+   int balls = game.getBalls();
+   
+   int current = -1;
+   for( int i = 0 ; i < draws ; i++ ) {
+      if( current >= draw.each[ i ] ) {
+         game.dump();
+         dump();
+         throw logic_error( "Draws are out of order" );
+      }
+      
+      if( draw.each[ i ] >= balls ) {
+         throw logic_error( "A ball is too large" );
+      }
+      current = draw.each[ i ];
+   }
 
    return true;
 }
@@ -91,13 +131,20 @@ bool Draw::validate() const {
 
 /// Print the internal state of the Draw
 ///
-///     Object              class               Game
-///     Object              this                0x7ffc6260c718
-///     Game                balls               16
-///     Game                draws               8
-///     Game                tickets             1000
+///     Object              class               Draw
+///     Object              this                0x7ffcfa8374b0
+///     Draw                draw                  1   3   7   9  10  11  12  15
 ///
 void Draw::dump() const {
    PRINT_CLASS_FOR_DUMP();
    /// We choose not to print the entire Game each time we print a Draw
+
+   ostringstream sb;
+   for( int i = 0 ; i < game.getDraws() ; i++ ) {
+      sb << setfill( ' ' );
+      sb << setw( 3 );
+      sb << +draw.each[ i ] << " ";
+   }
+
+   FORMAT_LINE_FOR_DUMP( "Draw", "draw" ) << sb.str() << endl;
 }

@@ -37,6 +37,39 @@ BOOST_AUTO_TEST_SUITE( test_Draw )
       }
    }
 
+   BOOST_AUTO_TEST_CASE( test_Draw ) {
+      for( int i = 1 ; i <= MAX_BALLS ; i++ ) {
+         for( int j = 1 ; j <= MAX_DRAWS ; j++ ) {
+            if( j > i ) {
+               continue;
+            }
+            Game aGame( i, j, 1000 );
+            for( int k = 0 ; k < 100 ; k++ ) {
+               Draw aDraw( aGame );
+               BOOST_CHECK( aDraw.validate() );
+//             aDraw.dump();
+            }
+         }
+      }
+
+
+      // Iterate over all allowed draws to ensure that when balls==draws
+      // continues to work (this stresses the picker algorithm).      
+      for( int i = 1 ; i < MAX_DRAWS ; i++ ) {
+         for( int j = 0 ; j < i * 10 ; j++ ) {
+            Game aGame( i, i, 1000 );
+            Draw aDraw( aGame );
+            BOOST_CHECK( aDraw.validate() );
+//          aDraw.dump();
+            
+            // Let's check Games where there's one more ball than draws
+            Game game1( i+1, i, 1000 );
+            Draw draw2( game1 );
+            BOOST_CHECK( draw2.validate() );
+//          draw2.dump();
+         }
+      }
+   }
 
 BOOST_AUTO_TEST_SUITE_END()
 
