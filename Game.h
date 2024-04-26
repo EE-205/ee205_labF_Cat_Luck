@@ -44,6 +44,12 @@ public:  // /////////////////// Constructors & Destructors /////////////////////
    Game( uint8_t newBalls, uint8_t newDraws, unsigned long newTickets );
 
 
+public:  // /////////////////////// Getters & Setters //////////////////////////
+   uint8_t       getBalls() const { return balls; };
+   uint8_t       getDraws() const { return draws; };
+   unsigned long getTickets() const { return tickets; };
+   
+
 public:  // ///////////////////////// Public Methods ///////////////////////////
    bool validate() const;
    void dump() const;

@@ -17,12 +17,24 @@
 
 using namespace std;
 
+#include <stdio.h>
 
 BOOST_AUTO_TEST_SUITE( test_Draw )
 
    BOOST_AUTO_TEST_CASE( test_validateDraw ) {
       BOOST_CHECK( Draw::validate_static() );
    }
+
+   BOOST_AUTO_TEST_CASE( test_getRandom8 ) {
+      for( int i = 1 ; i < 10 ; i++ ) {
+         printf( "i=%d  ", i );
+         for( int j = i ; j < 10 ; j++ ) {
+            printf( "%3u ", Draw::getRandom8( i ) );
+         }
+         puts( "\n" );
+      }
+   }
+
 
 BOOST_AUTO_TEST_SUITE_END()
 

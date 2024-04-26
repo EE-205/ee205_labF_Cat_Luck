@@ -23,12 +23,20 @@
 class Draw {
 private:  // /////////////////////// Private Members ///////////////////////////
    const Game& game;  ///< The game associated with this Draw
-//   uint64_t blob;
 
+   /// The sorted set of numbers in the draw
+   union alignas( 8 ) {
+      uint8_t  each[MAX_DRAWS];  ///< Each individual draw
+      uint64_t g8[MAX_DRAWS/8];  ///< A group of 8 draws
+   } draw;
+   
 
 public:  // ///////////////////////// Static Methods ///////////////////////////
-   static bool validate_static();
-   
+   static bool    validate_static();
+   static uint8_t getRandom8( uint8_t balls );
+
+
+
 
 public:  // /////////////////// Constructors & Destructors /////////////////////
    Draw( const Game& newGame );

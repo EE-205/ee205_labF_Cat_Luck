@@ -46,6 +46,13 @@ BOOST_AUTO_TEST_SUITE( test_Game )
       aGame.dump();
    }
 
+   BOOST_AUTO_TEST_CASE( test_GameGetters ) {
+      Game aGame( 16, 8, 1000 );
+      BOOST_CHECK_EQUAL( aGame.getBalls(), 16 );
+      BOOST_CHECK_EQUAL( aGame.getDraws(), 8 );
+      BOOST_CHECK_EQUAL( aGame.getTickets(), 1000 );
+   }
+
 BOOST_AUTO_TEST_SUITE_END()
 
 /// @endcond

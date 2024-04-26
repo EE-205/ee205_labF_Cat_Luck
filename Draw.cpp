@@ -11,6 +11,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <cassert>    // For assert
+#include <cstring>    // For memset
 
 #include "Draw.h"  // For obvious reasons
 
@@ -23,6 +24,47 @@ using namespace std;
 ///
 /// @param newGame The Game associated with this drawing
 Draw::Draw( const Game& newGame ) : game( newGame ) {
+   /// Initialize all the draws to 0 (in groups of 8 draws)
+   draw.g8[0] = 0;
+   draw.g8[1] = 0;
+
+   /// The fun of this function is how to efficiently and correctly generate
+   /// a sorted set of numbers
+
+   alignas( 8 ) uint8_t pool[ MAX_BALLS ];  ///< Numbers to draw from
+   memset( pool, 0, sizeof( pool ) ); // Turn them all "Off"
+
+   for( int i = 0 ; i < game.getDraws() ; i++ ) {
+//      uint8_t r = (uint8_t) 
+   }
+
+}
+
+
+/// Get a random number (`static inline`)
+///
+/// @return A 8-bit random number
+uint8_t Draw::getRandom8( uint8_t balls ) {
+   uint8_t rval;
+
+   asm volatile (
+
+//"rdrand rax;"
+"rdrand rcx;"
+"div bl;"
+   
+       "try_again:"
+       "rdrand ax;"          /// If CF==0, then the rdrand failed... try again
+       "jnc    try_again;"
+     "mov    ax, 52;"
+       "mov    cl, %[balls];"
+       "div    cl;"
+       "mov    %[rval], ah;"
+      :[rval] "=r" ( rval )   // Output
+      :[balls] "r" ( balls )  // Input
+      :"ax", "cl", "cc"   );  // Clobbers
+
+   return rval;
 }
 
 
@@ -52,11 +94,11 @@ bool Draw::validate() const {
 
 /// Print the internal state of the Draw
 ///
-///     Object              class               Game                                    
-///     Object              this                0x7ffc6260c718                          
-///     Game                balls               16                                
-///     Game                draws               8                                   
-///     Game                tickets             1000  
+///     Object              class               Game
+///     Object              this                0x7ffc6260c718
+///     Game                balls               16
+///     Game                draws               8
+///     Game                tickets             1000
 ///
 void Draw::dump() const {
    PRINT_CLASS_FOR_DUMP();
