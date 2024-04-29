@@ -43,7 +43,7 @@ BOOST_AUTO_TEST_SUITE( test_Game )
 
    BOOST_AUTO_TEST_CASE( test_validateDump ) {
       Game aGame( 16, 8, 1000 );
-      aGame.dump();
+//    aGame.dump();
    }
 
    BOOST_AUTO_TEST_CASE( test_GameGetters ) {

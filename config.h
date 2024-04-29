@@ -41,7 +41,7 @@ class Game;  // Forward declaration of the Game object
 /// Print =====================
 #define PRINT_HEADING_FOR_DUMP                                                \
     /* Print =========================================================== */   \
-    std::cout << std::setw(80) << std::setfill( '=' ) << "" << std::endl
+    std::cout << std::setw(80) << std::setfill( '=' ) << "" << '\n'
 
 
 /// Format a line for dumping the members of a class to the console.
@@ -58,5 +58,5 @@ class Game;  // Forward declaration of the Game object
 /// Format dumping a class' object information
 ///
 #define PRINT_CLASS_FOR_DUMP() \
-      FORMAT_LINE_FOR_DUMP( "Object", "class" ) << boost::core::demangled_name( BOOST_CORE_TYPEID( *this )) << std::endl ; \
-      FORMAT_LINE_FOR_DUMP( "Object", "this" )  << this  << std::endl
+      FORMAT_LINE_FOR_DUMP( "Object", "class" ) << boost::core::demangled_name( BOOST_CORE_TYPEID( *this )) << '\n' ; \
+      FORMAT_LINE_FOR_DUMP( "Object", "this" )  << this  << '\n' 

@@ -54,14 +54,14 @@ BOOST_AUTO_TEST_SUITE( test_Draw )
 
 
       // Iterate over all allowed draws to ensure that when balls==draws
-      // continues to work (this stresses the picker algorithm).      
+      // continues to work (this stresses the picker algorithm).
       for( int i = 1 ; i < MAX_DRAWS ; i++ ) {
          for( int j = 0 ; j < i * 10 ; j++ ) {
             Game aGame( i, i, 1000 );
             Draw aDraw( aGame );
             BOOST_CHECK( aDraw.validate() );
 //          aDraw.dump();
-            
+
             // Let's check Games where there's one more ball than draws
             Game game1( i+1, i, 1000 );
             Draw draw2( game1 );

@@ -16,7 +16,7 @@
 
 #include "config.h"   // For application-level tools
 
-#include "Game.h"     
+#include "Game.h"
 
 
 /// Represents one Draw in a Game
@@ -28,8 +28,8 @@ private:  // /////////////////////// Private Members ///////////////////////////
    union alignas( 8 ) {
       uint8_t  each[MAX_DRAWS];  ///< Each individual draw
       uint64_t g8[MAX_DRAWS/8];  ///< A group of 8 draws
-   } draw;
-   
+   } draw;  ///< The sorted set of numbers in the draw
+
 
 public:  // ///////////////////////// Static Methods ///////////////////////////
    static bool    validate_static();

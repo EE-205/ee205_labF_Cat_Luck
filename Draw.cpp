@@ -11,7 +11,12 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <cassert>    // For assert
+#include <cstdint>    // For uint8_t
 #include <cstring>    // For memset
+#include <iomanip>    // For setw
+#include <climits>    // For UCHAR_MAX
+#include <sstream>    // For ostringstream
+#include <stdexcept>  // For invalid_argument
 
 #include "Draw.h"  // For obvious reasons
 
@@ -35,23 +40,23 @@ Draw::Draw( const Game& newGame ) : game( newGame ) {
    alignas( 8 ) uint8_t pool[ MAX_BALLS ];  ///< Numbers to draw from
    memset( pool, 0, sizeof( pool ) );       //   0 means they number/ball is in the pool
 
-   uint8_t balls = newGame.getBalls();
+   const uint8_t balls = newGame.getBalls();
 //printf( "===\n" );
    for( int i = 0 ; i < game.getDraws() ; i++ ) {
       /// - Get a random index into the pool
       /// - If that index has been drawn (pool[r] != 0, iterate forward (and
       ///   wrap if necessary) until we find an unused number.
-      uint8_t r = getRandom8( balls );
-//printf( "r %d  ", r );
+      uint8_t randIndex = getRandom8( balls );
+//printf( "r %d  ", randIndex );
 
-      while( pool[ r ] != 0 ) {
-//printf( "pool[%d]=%d  ", r, pool[r] );
-         r = ( (r+1) >= balls ) ? 0 : (r + 1);
-//printf( "rrr %d  ", r );
+      while( pool[ randIndex ] != 0 ) {
+//printf( "pool[%d]=%d  ", randIndex, pool[randIndex] );
+         randIndex = ( (randIndex+1) >= balls ) ? 0 : (randIndex + 1);
+//printf( "randIndex %d  ", randIndex );
       }
-      assert( pool[r] == 0 );
-      pool[ r ] = 1;
-//printf( "DDD %d  balls=%d\n", r, balls );
+      assert( pool[ randIndex ] == 0 );
+      pool[ randIndex ] = 1;
+//printf( "DDD %d  balls=%d\n", randIndex, balls );
    }
 
    int found = 0;
@@ -107,10 +112,10 @@ bool Draw::validate_static() {
 /// @return `true` if the state is valid.  If not, throw an exception.
 bool Draw::validate() const {
    game.validate();
-   
-   int draws = game.getDraws();
-   int balls = game.getBalls();
-   
+
+   const int draws = game.getDraws();
+   const int balls = game.getBalls();
+
    int current = -1;
    for( int i = 0 ; i < draws ; i++ ) {
       if( current >= draw.each[ i ] ) {
@@ -118,7 +123,7 @@ bool Draw::validate() const {
          dump();
          throw logic_error( "Draws are out of order" );
       }
-      
+
       if( draw.each[ i ] >= balls ) {
          throw logic_error( "A ball is too large" );
       }
@@ -139,12 +144,12 @@ void Draw::dump() const {
    PRINT_CLASS_FOR_DUMP();
    /// We choose not to print the entire Game each time we print a Draw
 
-   ostringstream sb;
+   ostringstream stringBuffer;
    for( int i = 0 ; i < game.getDraws() ; i++ ) {
-      sb << setfill( ' ' );
-      sb << setw( 3 );
-      sb << +draw.each[ i ] << " ";
+      stringBuffer << setfill( ' ' );
+      stringBuffer << setw( 3 );
+      stringBuffer << +draw.each[ i ] << " ";
    }
 
-   FORMAT_LINE_FOR_DUMP( "Draw", "draw" ) << sb.str() << endl;
+   FORMAT_LINE_FOR_DUMP( "Draw", "draw" ) << stringBuffer.str() << '\n';
 }

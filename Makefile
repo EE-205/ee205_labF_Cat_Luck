@@ -21,8 +21,8 @@ CFLAGS    = -Wall -Wextra -Werror -march=native -mtune=native -masm=intel $(DEBU
 LINT      = clang-tidy
 LINTFLAGS = --quiet
 
-debug: DEBUG_FLAGS = -g -DDEBUG -O0
-debug: clean clang
+debug: DEBUG_FLAGS = -g3 -ggdb -DDEBUG -O0
+debug: clean $(TARGET)
 
 test:     CFLAGS += -DTESTING
 
@@ -50,6 +50,9 @@ doc: $(TARGET)
 test: $(TARGET)
 	cd tests ; $(MAKE) test
 
+test_valgrind: $(TARGET)
+	cd tests ; $(MAKE) valgrind
+
 run: $(TARGET)
 	./$(TARGET)
 
@@ -63,4 +66,4 @@ valgrind: $(TARGET)
 
 clean:
 	rm -fr $(TARGET) *.o .doxygen/docs
-	cd tests ; $(MAKE) clean 
+	cd tests ; $(MAKE) clean

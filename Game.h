@@ -27,11 +27,12 @@
 /// are established, they can't be changed.  The game, however, can be payed
 /// repeatedly.
 class Game {
-   
+
 private:  // /////////////////////// Private Members ///////////////////////////
-   uint8_t       balls;    ///< The number of balls in this Game
-   uint8_t       draws;    ///< The number of balls retrieved in each draw
-   unsigned long tickets;  ///< The number of customers who buy a lottery ticket
+   uint8_t       balls;        ///< The number of balls in this Game
+   uint8_t       draws;        ///< The number of balls retrieved in each Draw
+   unsigned long tickets;      ///< The number of customers who buy a lottery ticket
+   Draw*         winningDraw;  ///< Pointer to the winning Draw
 
 
 public:  // ///////////////////////// Static Methods ///////////////////////////
@@ -42,15 +43,24 @@ public:  // ///////////////////////// Static Methods ///////////////////////////
 
 public:  // /////////////////// Constructors & Destructors /////////////////////
    Game( uint8_t newBalls, uint8_t newDraws, unsigned long newTickets );
+   ~Game();
 
 
 public:  // /////////////////////// Getters & Setters //////////////////////////
-   uint8_t       getBalls() const { return balls; };
-   uint8_t       getDraws() const { return draws; };
+   /// @return The number of balls in this Game
+   uint8_t       getBalls()   const { return balls;   };
+
+   /// @return The number of balls retrieved in each Draw
+   uint8_t       getDraws()   const { return draws;   };
+
+   /// @return The number of customers who buy a lottery ticket
    unsigned long getTickets() const { return tickets; };
-   
+
 
 public:  // ///////////////////////// Public Methods ///////////////////////////
+   void buyAllLotteryTickets();
+   void makeWinningDraw();
+
    bool validate() const;
    void dump() const;
 

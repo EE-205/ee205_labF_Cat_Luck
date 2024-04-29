@@ -10,8 +10,14 @@
 /// @author TODO <TODO@hawaii.edu>
 ///////////////////////////////////////////////////////////////////////////////
 
+#include <cassert>    // For assert
+#include <cstdint>    // For uint8_t
+#include <ostream>    // For endl
+#include <stdexcept>  // For invalid_argument
 
 #include "Game.h"
+
+#include "Draw.h"
 
 using namespace std;
 
@@ -73,7 +79,9 @@ bool Game::validateTickets( [[maybe_unused]] const unsigned long newTickets ) {
 /// @param newBalls   The number of balls (numbers) in this Game
 /// @param newDraws   The number of draws in this Game
 /// @param newTickets The number of people who will play the Game
-Game::Game( const uint8_t newBalls, const uint8_t newDraws, const unsigned long newTickets ) {
+Game::Game( const uint8_t newBalls
+           ,const uint8_t newDraws
+           ,const unsigned long newTickets ) : winningDraw { nullptr } {
    if( validateBalls( newBalls) ) {
       balls = newBalls;
    }
@@ -84,6 +92,25 @@ Game::Game( const uint8_t newBalls, const uint8_t newDraws, const unsigned long 
       tickets = newTickets;
    }
 }
+
+
+/// Destructor for Game
+Game::~Game() {
+   if( winningDraw != nullptr ) {
+      delete winningDraw;
+      winningDraw = nullptr;
+   }
+}
+
+
+/// Draw a special ticket
+void Game::makeWinningDraw() {
+   if( winningDraw != nullptr ) {
+      throw logic_error( "Attempt to repeat a winning draw.  Each Game gets only one draw!" );
+   }
+   winningDraw = new Draw( *this );
+};
+
 
 
 /// Validate the internal state of the Game
@@ -102,15 +129,26 @@ bool Game::validate() const {
 ///
 /// @todo balls & draws are not printing
 ///
-///     Object              class               Game                                    
-///     Object              this                0x7ffc6260c718                          
-///     Game                balls               16                                
-///     Game                draws               8                                   
-///     Game                tickets             1000  
+///     Object              class               Game
+///     Object              this                0x7ffc6260c718
+///     Game                balls               16
+///     Game                draws               8
+///     Game                tickets             1000
 ///
 void Game::dump() const {
-      PRINT_CLASS_FOR_DUMP();
-      FORMAT_LINE_FOR_DUMP( "Game", "balls" )   << +balls    << std::endl ;
-      FORMAT_LINE_FOR_DUMP( "Game", "draws" )   << +draws    << std::endl ;
-      FORMAT_LINE_FOR_DUMP( "Game", "tickets" ) << +tickets  << std::endl ;
+   PRINT_CLASS_FOR_DUMP();
+   FORMAT_LINE_FOR_DUMP( "Game", "balls" )   << +balls   << '\n' ;
+   FORMAT_LINE_FOR_DUMP( "Game", "draws" )   << +draws   << '\n' ;
+   FORMAT_LINE_FOR_DUMP( "Game", "tickets" ) << +tickets << '\n' ;
+//   if( winningDraw == NULL ) {
+//      FORMAT_LINE_FOR_DUMP( "Game", "winningDraw" ) << "--" << '\n' ;
+//   } else {
+//    FORMAT_LINE_FOR_DUMP( "Game", "winningDraw" ) << " " << '\n' ;
+//    winningDraw->dump();
+//   }
+}
+
+
+/// Make a random Draw for each lottery ticket and store it in a data structure
+void Game::buyAllLotteryTickets() {
 }
