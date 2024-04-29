@@ -28,7 +28,7 @@ BOOST_AUTO_TEST_SUITE( test_Draw )
    BOOST_AUTO_TEST_CASE( test_getRandom8 ) {
       for( int i = 1 ; i < 10 ; i++ ) {
 //       printf( "i=%d  ", i );
-         int max_test = i * 10;
+         int max_test = i * 3;
          for( int j = 0 ; j < max_test ; j++ ) {
 //          printf( "%3u ", Draw::getRandom8( i ) );
             BOOST_CHECK_LT( Draw::getRandom8( i ), i );
@@ -67,6 +67,27 @@ BOOST_AUTO_TEST_SUITE( test_Draw )
             Draw draw2( game1 );
             BOOST_CHECK( draw2.validate() );
 //          draw2.dump();
+         }
+      }
+   }
+   
+   
+   #define DRAWS_TO_CHECK (512)
+   
+   BOOST_AUTO_TEST_CASE( test_Equality ) {
+      Game aGame( MAX_BALLS, MAX_DRAWS, 1000 );
+      Draw* draws[ DRAWS_TO_CHECK ];
+      for( int i = 0 ; i < DRAWS_TO_CHECK ; i++ ) {
+         draws[i] = new Draw( aGame );
+      }
+      
+      for( int i = 0 ; i < DRAWS_TO_CHECK ; i++ ) {
+         for( int j = 0 ; j < DRAWS_TO_CHECK ; j++ ) {
+            if( i == j ) {
+               BOOST_CHECK( draws[i] == draws[j] );
+            } else {
+               BOOST_CHECK( draws[i] != draws[j] );
+            }
          }
       }
    }

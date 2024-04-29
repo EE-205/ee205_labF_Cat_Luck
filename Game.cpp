@@ -140,12 +140,12 @@ void Game::dump() const {
    FORMAT_LINE_FOR_DUMP( "Game", "balls" )   << +balls   << '\n' ;
    FORMAT_LINE_FOR_DUMP( "Game", "draws" )   << +draws   << '\n' ;
    FORMAT_LINE_FOR_DUMP( "Game", "tickets" ) << +tickets << '\n' ;
-//   if( winningDraw == NULL ) {
-//      FORMAT_LINE_FOR_DUMP( "Game", "winningDraw" ) << "--" << '\n' ;
-//   } else {
-//    FORMAT_LINE_FOR_DUMP( "Game", "winningDraw" ) << " " << '\n' ;
-//    winningDraw->dump();
-//   }
+   if( winningDraw == nullptr ) {
+      FORMAT_LINE_FOR_DUMP( "Game", "winningDraw" ) << "--" << '\n' ;
+   } else {
+      FORMAT_LINE_FOR_DUMP( "Game", "winningDraw" ) << " " << '\n' ;
+      winningDraw->dump();
+   }
 }
 
 

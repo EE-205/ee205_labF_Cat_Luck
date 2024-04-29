@@ -44,4 +44,10 @@ public:  // ///////////////////////// Public Methods ///////////////////////////
    bool validate() const;
    void dump() const;
 
+
+public:  // /////////////////////// Operator Overrides /////////////////////////
+   bool operator == ( const Draw& rhs_draw ) const;
+   bool operator != ( const Draw& rhs_draw ) const;
+   bool operator <  ( const Draw& rhs_draw ) const;
+
 };

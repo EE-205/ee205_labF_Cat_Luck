@@ -11,10 +11,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <cassert>    // For assert
+#include <climits>    // For UCHAR_MAX
 #include <cstdint>    // For uint8_t
 #include <cstring>    // For memset
 #include <iomanip>    // For setw
-#include <climits>    // For UCHAR_MAX
 #include <sstream>    // For ostringstream
 #include <stdexcept>  // For invalid_argument
 
@@ -152,4 +152,47 @@ void Draw::dump() const {
    }
 
    FORMAT_LINE_FOR_DUMP( "Draw", "draw" ) << stringBuffer.str() << '\n';
+}
+
+
+/// Compare two Draw objects with `==`
+///
+/// @param rhs_draw The Draw on the right side of the `==`
+///
+/// @return `true` if the two Draw objects have the same values... `false` if not
+bool Draw::operator == ( const Draw& rhs_draw ) const {
+   for( int i = 0 ; i < game.getDraws() ; i++ ) {
+      if( draw.each[i] != rhs_draw.draw.each[i] ) {
+         return false;
+      }
+   }
+
+   return true;
+}
+
+
+/// Compare two Draw objects with `!=`
+///
+/// @param rhs_draw The Draw on the right side of the `!=`
+///
+/// @return `true` if the two Draw objects are different... `false` if not
+bool Draw::operator != ( const Draw& rhs_draw ) const {
+
+   return ! operator==( rhs_draw ) ;
+}
+
+
+/// Compare two Draw objects with `<`
+///
+/// @param rhs_draw The Draw on the right side of the `<`
+///
+/// @return `true` if the left Draw object is less than the right... `false` if not
+bool Draw::operator <  ( const Draw& rhs_draw ) const {
+   for( int i = 0 ; i < game.getDraws() ; i++ ) {
+      if( draw.each[i] < rhs_draw.draw.each[i] ) {
+         return true;
+      }
+   }
+
+   return false;
 }

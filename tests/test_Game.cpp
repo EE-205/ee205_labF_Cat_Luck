@@ -53,6 +53,13 @@ BOOST_AUTO_TEST_SUITE( test_Game )
       BOOST_CHECK_EQUAL( aGame.getTickets(), 1000 );
    }
 
+   BOOST_AUTO_TEST_CASE( test_makeWinningDraw ) {
+      Game aGame( 16, 8, 1000 );
+      BOOST_CHECK_NO_THROW( aGame.makeWinningDraw() );
+      BOOST_CHECK_THROW( aGame.makeWinningDraw(), logic_error );
+//    aGame.dump();
+   }
+
 BOOST_AUTO_TEST_SUITE_END()
 
 /// @endcond
