@@ -50,6 +50,7 @@ public:  // ///////////////////////// Public Methods ///////////////////////////
 
 
 public:  // /////////////////////// Operator Overrides /////////////////////////
+   Draw& operator = ( const Draw& rhs_draw );
    bool operator == ( const Draw& rhs_draw ) const;
    bool operator != ( const Draw& rhs_draw ) const;
    bool operator <  ( const Draw& rhs_draw ) const;

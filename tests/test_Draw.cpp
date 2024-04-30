@@ -102,23 +102,57 @@ BOOST_AUTO_TEST_SUITE( test_Draw )
       }
    };
 
-   BOOST_AUTO_TEST_CASE( test_lessThan ) {
+
+   BOOST_AUTO_TEST_CASE( test_lessThan_index_0 ) {
       Game aGame( MAX_BALLS, MAX_DRAWS, 1000 );
       TestDraw draw1( aGame );
-      // Initialize draw1 to 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
-      for( int i = 0 ; i < MAX_DRAWS - 1 ; i++ ) {
-         draw1.setDraw( i, i );
-      }
+      int index = MAX_DRAWS - 1;
+      int value = MAX_BALLS - 1;
+      // Initialize draw1 to 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249
+      do {
+         draw1.setDraw( index--, value-- );
+      } while( index >= 0 );
+      draw1.setDraw( 0, 0 );
+//    draw1.dump();
+      BOOST_CHECK( draw1.validate() );
+
+      TestDraw draw2 = draw1;
+//    draw2.dump();
+      BOOST_CHECK( draw2.validate() );
+      BOOST_CHECK( draw1 == draw2 );
 
       // Test draws at index 0
-      TestDraw draw2( aGame );
-      for( int i = 1 ; i < MAX_BALLS ; i++ ) {
+      for( int i = 1 ; i <= MAX_BALLS - MAX_DRAWS ; i++ ) {
          draw2.setDraw( 0, i );
+//       draw2.dump();
          BOOST_CHECK( draw1 < draw2 );
       }
-
-
    }
+
+
+   BOOST_AUTO_TEST_CASE( test_lessThan_index_15 ) {
+      Game aGame( MAX_BALLS, MAX_DRAWS, 1000 );
+      TestDraw draw1( aGame );
+      // Initialize draw1 to 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249
+      for( int i = 0 ; i < MAX_DRAWS ; i++ ) {
+         draw1.setDraw( i, i );
+      }
+//    draw1.dump();
+      BOOST_CHECK( draw1.validate() );
+
+      TestDraw draw2 = draw1;
+//    draw2.dump();
+      BOOST_CHECK( draw2.validate() );
+      BOOST_CHECK( draw1 == draw2 );
+
+
+      // Test draws at index MAX_DRAWS
+      for( int i = MAX_DRAWS ; i < MAX_BALLS ; i++ ) {
+         draw2.setDraw( MAX_DRAWS-1, i );
+         BOOST_CHECK( draw1 < draw2 );
+      }
+   }
+
 
 BOOST_AUTO_TEST_SUITE_END()
 

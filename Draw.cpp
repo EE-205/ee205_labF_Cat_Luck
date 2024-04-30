@@ -162,6 +162,14 @@ void Draw::dump() const {
 }
 
 
+Draw& Draw::operator = ( const Draw& rhs_draw ) {
+   assert( &game == &rhs_draw.game );  /// Assert that the two Draw objects come from the same Game
+   draw = rhs_draw.draw;
+
+   return *this;
+}
+
+
 /// Compare two Draw objects with `==`
 ///
 /// @param rhs_draw The Draw on the right side of the `==`
@@ -196,6 +204,7 @@ bool Draw::operator != ( const Draw& rhs_draw ) const {
 /// @return `true` if the left Draw object is less than the right... `false` if not
 bool Draw::operator <  ( const Draw& rhs_draw ) const {
    for( int i = 0 ; i < game.getDraws() ; i++ ) {
+//    printf( "i = %d   left = %d   right %d\n", i, draw.each[i], rhs_draw.draw.each[i] );
       if( draw.each[i] < rhs_draw.draw.each[i] ) {
          return true;
       }
