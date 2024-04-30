@@ -70,17 +70,17 @@ BOOST_AUTO_TEST_SUITE( test_Draw )
          }
       }
    }
-   
-   
+
+
    #define DRAWS_TO_CHECK (512)
-   
+
    BOOST_AUTO_TEST_CASE( test_Equality ) {
       Game aGame( MAX_BALLS, MAX_DRAWS, 1000 );
       Draw* draws[ DRAWS_TO_CHECK ];
       for( int i = 0 ; i < DRAWS_TO_CHECK ; i++ ) {
          draws[i] = new Draw( aGame );
       }
-      
+
       for( int i = 0 ; i < DRAWS_TO_CHECK ; i++ ) {
          for( int j = 0 ; j < DRAWS_TO_CHECK ; j++ ) {
             if( i == j ) {
@@ -90,6 +90,34 @@ BOOST_AUTO_TEST_SUITE( test_Draw )
             }
          }
       }
+   }
+
+
+   class TestDraw : public Draw {
+   public:
+      TestDraw( const Game& newGame ) : Draw( newGame ) {}
+
+      void setDraw( int index, int value ) {
+         draw.each[ index ] = value;
+      }
+   };
+
+   BOOST_AUTO_TEST_CASE( test_lessThan ) {
+      Game aGame( MAX_BALLS, MAX_DRAWS, 1000 );
+      TestDraw draw1( aGame );
+      // Initialize draw1 to 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+      for( int i = 0 ; i < MAX_DRAWS - 1 ; i++ ) {
+         draw1.setDraw( i, i );
+      }
+
+      // Test draws at index 0
+      TestDraw draw2( aGame );
+      for( int i = 1 ; i < MAX_BALLS ; i++ ) {
+         draw2.setDraw( 0, i );
+         BOOST_CHECK( draw1 < draw2 );
+      }
+
+
    }
 
 BOOST_AUTO_TEST_SUITE_END()

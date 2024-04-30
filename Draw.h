@@ -24,10 +24,13 @@ class Draw {
 private:  // /////////////////////// Private Members ///////////////////////////
    const Game& game;  ///< The game associated with this Draw
 
+
+protected:  // //////////////////// Protected Members //////////////////////////
    /// The sorted set of numbers in the draw
+   /// These are protected, so unit tests can derive and set them
    union alignas( 8 ) {
-      uint8_t  each[MAX_DRAWS];  ///< Each individual draw
-      uint64_t g8[MAX_DRAWS/8];  ///< A group of 8 draws
+      uint8_t  each[ MAX_DRAWS   ];  ///< Each individual draw
+      uint64_t   g8[ MAX_DRAWS/8 ];  ///< A group of 8 draws
    } draw;  ///< The sorted set of numbers in the draw
 
 
@@ -37,6 +40,7 @@ public:  // ///////////////////////// Static Methods ///////////////////////////
 
 
 public:  // /////////////////// Constructors & Destructors /////////////////////
+   Draw( const Draw& rhs_draw );  // Copy constructor
    Draw( const Game& newGame );
 
 
@@ -49,5 +53,8 @@ public:  // /////////////////////// Operator Overrides /////////////////////////
    bool operator == ( const Draw& rhs_draw ) const;
    bool operator != ( const Draw& rhs_draw ) const;
    bool operator <  ( const Draw& rhs_draw ) const;
+// bool operator <= ( const Draw& rhs_draw ) const;
+// bool operator >  ( const Draw& rhs_draw ) const;
+// bool operator >= ( const Draw& rhs_draw ) const;
 
 };

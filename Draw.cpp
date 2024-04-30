@@ -69,6 +69,13 @@ Draw::Draw( const Game& newGame ) : game( newGame ) {
 }
 
 
+/// Copy constructor
+///
+/// @param rhs_draw The Draw object to copy **from**
+Draw::Draw( const Draw& rhs_draw ) : game{ rhs_draw.game }, draw { rhs_draw.draw } {
+}
+
+
 /// Get a random number from 0 to the number of balls in the Lottery
 ///
 /// @param balls The number of balls in the Game
@@ -196,3 +203,4 @@ bool Draw::operator <  ( const Draw& rhs_draw ) const {
 
    return false;
 }
+
