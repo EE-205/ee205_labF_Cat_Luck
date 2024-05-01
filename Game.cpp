@@ -6,6 +6,8 @@
 //
 /// Define the Game class
 ///
+/// @todo Find all exceptions and make sure they have an @throws
+///
 /// @file   Game.cpp
 /// @author TODO <TODO@hawaii.edu>
 ///////////////////////////////////////////////////////////////////////////////
@@ -158,14 +160,23 @@ void Game::buyAllLotteryTickets() {
    assert( validate() );
 
    if( winningDraw != nullptr ) {
+      /// @throws logic_error Attempt to buy lottery tickets after the draw!
       throw logic_error( "Attempt to buy lottery tickets after the draw!" );
    }
 
-   for( unsigned long i = 0 ; i < tickets ; i++ ) {
-      Node* xx = new Node( *this );
-      assert( xx->validate() );
-      xx->left = nullptr;
-      xx->right = nullptr;
+   if( head != nullptr ) {
+      /// @throws logic_error Attempt to buy more lottery tickets after buying them all already!
+      throw logic_error( "Attempt to buy more lottery tickets after buying them all already!" );
+   }
+
+   /// Put the first lottery ticket in #Game.head
+   head = new Node( *this );
+
+   for( unsigned long i = 1 ; i < tickets ; i++ ) {
+      Node* ticket = new Node( *this );
+      assert( ticket->validate() );
+      ticket->left = nullptr;
+      ticket->right = nullptr;
       printf( "." );
    }
 }

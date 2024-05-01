@@ -26,15 +26,30 @@
 class Game {
 private:  // /////////////////////// Private Class ///////////////////////////
 
+   /// A Draw Node stored in a Binary Search Tree within Game
+   ///
+   /// If a Game has multiple tickets with the same Draw, count indicates how
+   /// many
    class Node : public Draw {
-   friend Game;
+   friend Game;  ///< The Game class is a friend of Node @todo Test this when finished
 
    private:  // ///////////////////// Private Members /////////////////////////
-      Node* left;
-      Node* right;
+      Node* left;          ///< The left tree
+      Node* right;         ///< The right tree
+      unsigned int count;  ///< The number of tickets with this Draw
 
    public:  // ///////////////// Constructors & Destructors ///////////////////
-      Node( Game& newGame ) : Draw( newGame ), left{ nullptr }, right{ nullptr } {}
+      /// Create a new Node
+      ///
+      /// @param newGame The Game for this node
+      Node( Game& newGame ) : Draw( newGame )
+                            , left{ nullptr }
+                            , right{ nullptr }
+                            , count{ 1 } {}
+
+   public:  // /////////////////////// Public Methods /////////////////////////
+//      add( Node* root ) {
+//      }
    };
 
 private:  // /////////////////////// Private Members ///////////////////////////
