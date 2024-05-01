@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="Popoki (6d09ea1a-5d55-4436-b3c6-57a8673ae77f)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/marknels/src/src-clion/ee205_labF_cat_luck" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
