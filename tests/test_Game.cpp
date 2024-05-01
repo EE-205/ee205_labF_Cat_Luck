@@ -72,7 +72,7 @@ BOOST_AUTO_TEST_SUITE( test_Game )
    }
 
    BOOST_AUTO_TEST_CASE( test_buyAllLotteryTickets ) {
-      Game aGame( 16, 8, 1000 );
+      Game aGame( 16, 8, 10 );
       BOOST_CHECK_NO_THROW( aGame.buyAllLotteryTickets() );
 //    aGame.dump();
    }

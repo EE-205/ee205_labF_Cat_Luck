@@ -34,8 +34,8 @@ private:  // /////////////////////// Private Class ///////////////////////////
    friend Game;  ///< The Game class is a friend of Node @todo Test this when finished
 
    private:  // ///////////////////// Private Members /////////////////////////
-      Node* left;          ///< The left tree
-      Node* right;         ///< The right tree
+      Node*        left;   ///< The left tree
+      Node*        right;  ///< The right tree
       unsigned int count;  ///< The number of tickets with this Draw
 
    public:  // ///////////////// Constructors & Destructors ///////////////////
@@ -48,8 +48,39 @@ private:  // /////////////////////// Private Class ///////////////////////////
                             , count{ 1 } {}
 
    public:  // /////////////////////// Public Methods /////////////////////////
-//      add( Node* root ) {
-//      }
+      void add( Node& root ) {
+         if( *this == root ) {
+            count++;
+//          printf( "Found duplicate... increment root\n" );
+         } else if ( *this < root ) {
+            if( root.left == nullptr ) {
+               root.left = this;
+//             printf( "Attach to root.left\n" );
+            } else {
+//             printf( "Descend down root.left\n" );
+               add( *root.left );
+            }
+         } else {
+            if( root.right == nullptr ) {
+               root.right = this;
+//             printf( "Attach to root.right\n" );
+            } else {
+//             printf( "Descend down root.right\n" );
+               add( *root.right );
+            }
+         }
+      }
+
+      void dumpInOrder( Node* node ) {
+         if( node == nullptr ) {  // Base case
+            return;
+         }
+         node->left->dumpInOrder( node->left );
+         PRINT_CLASS_FOR_DUMP();
+         FORMAT_LINE_FOR_DUMP( "Node", "count" ) << count << '\n' ;
+         Draw::dump();
+         node->right->dumpInOrder( node->right );
+      }
    };
 
 private:  // /////////////////////// Private Members ///////////////////////////

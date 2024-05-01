@@ -152,6 +152,12 @@ void Game::dump() const {
       FORMAT_LINE_FOR_DUMP( "Game", "winningDraw" ) << " " << '\n' ;
       winningDraw->dump();
    }
+
+   if( head == nullptr ) {
+      FORMAT_LINE_FOR_DUMP( "Game", "tickets" ) << "--" << '\n' ;
+   } else {
+      FORMAT_LINE_FOR_DUMP( "Game", "tickets" ) << " " << '\n' ;
+   }
 }
 
 
@@ -171,12 +177,17 @@ void Game::buyAllLotteryTickets() {
 
    /// Put the first lottery ticket in #Game.head
    head = new Node( *this );
+   printf( "Head\n" );
+   head->dump();
 
    for( unsigned long i = 1 ; i < tickets ; i++ ) {
       Node* ticket = new Node( *this );
       assert( ticket->validate() );
-      ticket->left = nullptr;
-      ticket->right = nullptr;
+
+      ticket->add( *head );
+
       printf( "." );
    }
+
+   head->dumpInOrder( head );
 }
