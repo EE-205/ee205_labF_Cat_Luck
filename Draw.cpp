@@ -216,12 +216,19 @@ bool Draw::operator != ( const Draw& rhs_draw ) const {
 /// @return `true` if the left Draw object is less than the right... `false` if not
 bool Draw::operator < ( const Draw& rhs_draw ) const {
    for( int i = 0 ; i < game.getDraws() ; i++ ) {
-//    printf( "i = %d   left = %d   right %d\n", i, draw.each[i], rhs_draw.draw.each[i] );
-      if( draw.each[i] < rhs_draw.draw.each[i] ) {
+      int lhs = draw.each[i];
+      int rhs = rhs_draw.draw.each[i];
+//    printf( "i = %d   left = %d   right %d\n", i, lhs, rhs );
+      if( lhs < rhs ) {
+//       printf( "lhs is < rhs\n");
          return true;
+      } else if( lhs > rhs ) {
+//       printf( "lhs is not > rhs\n" );
+         return false;
       }
    }
 
+// printf( "lhs is not < rhs\n" );
    return false;
 }
 
