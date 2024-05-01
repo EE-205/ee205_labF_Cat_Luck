@@ -151,4 +151,6 @@ void Game::dump() const {
 
 /// Make a random Draw for each lottery ticket and store it in a data structure
 void Game::buyAllLotteryTickets() {
+   assert( game.validate() );
+   assert( winningDraw == nullptr );
 }
