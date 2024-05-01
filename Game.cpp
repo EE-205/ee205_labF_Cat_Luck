@@ -159,8 +159,10 @@ void Game::buyAllLotteryTickets() {
    }
 
    for( unsigned long i = 0 ; i < tickets ; i++ ) {
-      Draw* xx = new Draw( *this );
+      Node* xx = new Node();
       assert( xx->validate() );
+      xx->left = nullptr;
+      xx->right = nullptr;
       printf( "." );
    }   
 }

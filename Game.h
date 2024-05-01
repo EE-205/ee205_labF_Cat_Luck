@@ -17,10 +17,7 @@
 
 #include "config.h"   // For application-level tools
 
-
-#define MIN_BALLS   (  1)  ///< The minimum number of balls in any game
-#define MAX_BALLS   (250)  ///< The maximum number of balls in any game
-#define MAX_DRAWS   ( 16)  ///< The maximum number of balls drawn in any game
+#include "Draw.h"
 
 
 /// Represents a single Lottery game.  Once the initial paramters of the game
@@ -29,14 +26,13 @@
 class Game {
 private:  // /////////////////////// Private Class ///////////////////////////
 
-   class Node {
+   class Node : public Draw {
    private:  // ///////////////////// Private Members /////////////////////////
-      Draw& draw;
       Node* left;
       Node* right;
       
    public:  // ///////////////// Constructors & Destructors ///////////////////
-      Node( Draw& newDraw ) : draw { newDraw }, left{ nullptr }, right{ nullptr } {}
+      Node() : Draw( *this ), left{ nullptr }, right{ nullptr } {}
    };
 
 private:  // /////////////////////// Private Members ///////////////////////////

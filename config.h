@@ -25,6 +25,11 @@
 #define PROGRAM_NAME  "lottoSim"
 
 
+#define MIN_BALLS   (  1)  ///< The minimum number of balls in any game
+#define MAX_BALLS   (250)  ///< The maximum number of balls in any game
+#define MAX_DRAWS   ( 16)  ///< The maximum number of balls drawn in any game
+
+
 class Draw;  // Forward declaration of the Draw object
 class Game;  // Forward declaration of the Game object
 

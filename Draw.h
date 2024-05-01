@@ -16,8 +16,6 @@
 
 #include "config.h"   // For application-level tools
 
-#include "Game.h"
-
 
 /// Represents one Draw in a Game
 class Draw {

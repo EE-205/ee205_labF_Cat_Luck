@@ -13,6 +13,7 @@
 
 #include <boost/test/unit_test.hpp>
 
+#include "../Game.h"
 #include "../Draw.h"
 
 using namespace std;
