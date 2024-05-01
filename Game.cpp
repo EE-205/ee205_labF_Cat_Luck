@@ -65,11 +65,14 @@ bool Game::validateDraws( const uint8_t newBalls, const uint8_t newDraws ) {
 /// Validate the number of tickets in the Game
 ///
 /// This is actually bounds-checked by the datatype... The minimum number is
-/// 0 and the maximum number is ULONG_MAX.
+/// 1 and the maximum number is ULONG_MAX.
 ///
 /// @param newTickets The proposed number of tickets issued in this Game
 /// @return `true` if `newTickets` is acceptable
 bool Game::validateTickets( [[maybe_unused]] const unsigned long newTickets ) {
+   if( newTickets < 1 ) {
+      throw invalid_argument( "Game.tickets must be >= 1" );
+   }
    return true;
 }
 

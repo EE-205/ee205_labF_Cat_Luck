@@ -11,6 +11,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 /// @cond Suppress Doxygen warnings
 
+#include <climits>  // For UINT_MAX
+
 #define BOOST_TEST_MODULE Lucky_Cat_Test_Suite
 #include <boost/test/included/unit_test.hpp>
 
@@ -38,7 +40,9 @@ BOOST_AUTO_TEST_SUITE( test_Game )
    }
 
    BOOST_AUTO_TEST_CASE( test_validateTickets ) {
-      /// No tests for validateTickets (for now)
+      BOOST_CHECK_THROW( Game::validateTickets( 0 ), invalid_argument );
+      BOOST_CHECK_NO_THROW( Game::validateTickets( 1 ) );
+      BOOST_CHECK_NO_THROW( Game::validateTickets( UINT_MAX ) );
    }
 
    BOOST_AUTO_TEST_CASE( test_validateDump ) {
