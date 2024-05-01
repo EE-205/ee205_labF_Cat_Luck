@@ -138,7 +138,6 @@ bool Draw::validate() const {
       }
       current = draw.each[ i ];
    }
-
    return true;
 }
 
@@ -176,7 +175,7 @@ Draw& Draw::operator = ( const Draw& rhs_draw ) {
    if (this == &rhs_draw ) {
       return *this;
    }
-   
+
    draw = rhs_draw.draw;
 
    return *this;

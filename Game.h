@@ -34,7 +34,7 @@ private:  // /////////////////////// Private Class ///////////////////////////
       Node* right;
 
    public:  // ///////////////// Constructors & Destructors ///////////////////
-      Node() : Draw( *this ), left{ nullptr }, right{ nullptr } {}
+      Node( Game& newGame ) : Draw( newGame ), left{ nullptr }, right{ nullptr } {}
    };
 
 private:  // /////////////////////// Private Members ///////////////////////////

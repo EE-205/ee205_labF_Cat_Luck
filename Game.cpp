@@ -121,7 +121,7 @@ bool Game::validate() const {
    validateBalls( balls );
    validateDraws( balls, draws );
    validateTickets( tickets );
-   
+
    return true;
 }
 
@@ -153,16 +153,16 @@ void Game::dump() const {
 /// Make a random Draw for each lottery ticket and store it in a data structure
 void Game::buyAllLotteryTickets() {
    assert( validate() );
-   
+
    if( winningDraw != nullptr ) {
       throw logic_error( "Attempt to buy lottery tickets after the draw!" );
    }
 
    for( unsigned long i = 0 ; i < tickets ; i++ ) {
-      Node* xx = new Node();
+      Node* xx = new Node( *this );
       assert( xx->validate() );
       xx->left = nullptr;
       xx->right = nullptr;
       printf( "." );
-   }   
+   }
 }
