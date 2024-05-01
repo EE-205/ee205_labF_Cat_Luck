@@ -27,10 +27,12 @@ class Game {
 private:  // /////////////////////// Private Class ///////////////////////////
 
    class Node : public Draw {
+   friend Game;
+
    private:  // ///////////////////// Private Members /////////////////////////
       Node* left;
       Node* right;
-      
+
    public:  // ///////////////// Constructors & Destructors ///////////////////
       Node() : Draw( *this ), left{ nullptr }, right{ nullptr } {}
    };
