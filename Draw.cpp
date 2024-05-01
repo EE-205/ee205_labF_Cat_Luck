@@ -132,6 +132,8 @@ bool Draw::validate() const {
       }
 
       if( draw.each[ i ] >= balls ) {
+         game.dump();
+         dump();
          throw logic_error( "A ball is too large" );
       }
       current = draw.each[ i ];

@@ -100,6 +100,10 @@ BOOST_AUTO_TEST_SUITE( test_Draw )
       void setDraw( int index, int value ) {
          draw.each[ index ] = value;
       }
+
+      int getDraw( int index ) {
+         return draw.each[ index ];
+      }
    };
 
 
@@ -149,6 +153,51 @@ BOOST_AUTO_TEST_SUITE( test_Draw )
       // Test draws at index MAX_DRAWS
       for( int i = MAX_DRAWS ; i < MAX_BALLS ; i++ ) {
          draw2.setDraw( MAX_DRAWS-1, i );
+         BOOST_CHECK( draw1 < draw2 );
+      }
+   }
+
+
+   BOOST_AUTO_TEST_CASE( test_lessThan ) {
+      Game aGame( MAX_BALLS, MAX_DRAWS, 1000 );
+      for( int i = 0 ; i < 100000 ; i++ ) {
+         TestDraw draw1( aGame );
+         TestDraw draw2 = draw1;
+
+         // Pick a random index (j) where the draw at that index won't wrap when incremented
+         int j = rand() % MAX_DRAWS;
+         while( true ) {
+            // The draw can't be too big!
+            if( draw2.getDraw( j ) >= MAX_BALLS - 1 ) {
+               j = rand() % MAX_DRAWS;
+               continue;
+            }
+
+            // The last draw is good
+            if( j >= MAX_DRAWS-1 ) {
+               break;
+            }
+
+            // If the next draw immediately follows the previous draw, then
+            // find another index
+            if( draw2.getDraw( j )+1 == draw2.getDraw( j + 1 ) ) {
+               j = rand() % MAX_DRAWS;
+               continue;
+            }
+
+            // All criteria is satisified... Use this j to increment draw2
+            // making it just a little bigger than draw1
+            break;
+         }
+
+         draw2.setDraw( j, draw2.getDraw( j ) + 1 );
+         // draw2 has exactly 1 draw that's one more than draw1
+
+//       draw1.dump();
+         BOOST_CHECK( draw1.validate() );
+
+//       draw2.dump();
+         BOOST_CHECK( draw2.validate() );
          BOOST_CHECK( draw1 < draw2 );
       }
    }
