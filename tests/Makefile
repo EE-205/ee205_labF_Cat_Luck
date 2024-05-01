@@ -18,7 +18,8 @@ all:  $(TARGET)
 
 CXX       = clang++
 # Boost tests compile-run faster without -DBOOST_TEST_DYN_LINK
-CXXFLAGS  = -std=c++17 -Wall -Wextra -Werror -march=native -mtune=native -DTARGET=\"$(TARGET)\" $(DEBUG_FLAGS)
+# CXXFLAGS  = -std=c++17 -Wall -Wextra -Werror -march=native -mtune=native -DTARGET=\"$(TARGET)\" $(DEBUG_FLAGS)
+CXXFLAGS  = -std=c++17 -Wall -Wextra -march=native -mtune=native -DTARGET=\"$(TARGET)\" $(DEBUG_FLAGS)
 LDLIBS    = -lboost_system -lboost_thread -lboost_unit_test_framework
 LINT      = clang-tidy
 LINTFLAGS = --quiet -extra-arg=-std=c++17

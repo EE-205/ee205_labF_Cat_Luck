@@ -81,7 +81,8 @@ bool Game::validateTickets( [[maybe_unused]] const unsigned long newTickets ) {
 /// @param newTickets The number of people who will play the Game
 Game::Game( const uint8_t newBalls
            ,const uint8_t newDraws
-           ,const unsigned long newTickets ) : winningDraw { nullptr } {
+           ,const unsigned long newTickets ) : head { nullptr }
+                                             , winningDraw { nullptr } {
    if( validateBalls( newBalls) ) {
       balls = newBalls;
    }
@@ -120,7 +121,7 @@ bool Game::validate() const {
    validateBalls( balls );
    validateDraws( balls, draws );
    validateTickets( tickets );
-
+   
    return true;
 }
 
@@ -151,6 +152,15 @@ void Game::dump() const {
 
 /// Make a random Draw for each lottery ticket and store it in a data structure
 void Game::buyAllLotteryTickets() {
-   assert( game.validate() );
-   assert( winningDraw == nullptr );
+   assert( validate() );
+   
+   if( winningDraw != nullptr ) {
+      throw logic_error( "Attempt to buy lottery tickets after the draw!" );
+   }
+
+   for( unsigned long i = 0 ; i < tickets ; i++ ) {
+      Draw* xx = new Draw( *this );
+      assert( xx->validate() );
+      printf( "." );
+   }   
 }
