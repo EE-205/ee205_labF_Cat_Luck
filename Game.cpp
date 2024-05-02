@@ -14,6 +14,7 @@
 
 #include <cassert>    // For assert
 #include <cstdint>    // For uint8_t
+#include <iostream>   // For cout
 #include <ostream>    // For endl
 #include <stdexcept>  // For invalid_argument
 
@@ -232,7 +233,6 @@ unsigned int Game::countWinningTickets() const {
    Node *aNode = head->getNode(*winningDraw);
    if (aNode == nullptr) {
       return 0;
-   } else {
-      return aNode->count;
    }
+   return aNode->count;
 }

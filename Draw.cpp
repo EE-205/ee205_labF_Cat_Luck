@@ -222,7 +222,8 @@ bool Draw::operator < ( const Draw& rhs_draw ) const {
       if( lhs < rhs ) {
 //       printf( "lhs is < rhs\n");
          return true;
-      } else if( lhs > rhs ) {
+      }
+      if( lhs > rhs ) {
 //       printf( "lhs is not > rhs\n" );
          return false;
       }
