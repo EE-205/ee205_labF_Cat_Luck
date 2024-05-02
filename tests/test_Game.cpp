@@ -77,6 +77,17 @@ BOOST_AUTO_TEST_SUITE( test_Game )
 //    aGame.dump();
    }
 
+   BOOST_AUTO_TEST_CASE( test_countWinningTickets_Basic ) {
+      Game aGame( 1, 1, 1 );
+      BOOST_CHECK_THROW( aGame.countWinningTickets(), logic_error );
+      BOOST_CHECK_NO_THROW( aGame.buyAllLotteryTickets() );
+      BOOST_CHECK_THROW( aGame.countWinningTickets(), logic_error );
+      BOOST_CHECK_NO_THROW( aGame.makeWinningDraw() );
+
+      BOOST_CHECK_EQUAL( aGame.countWinningTickets(), 1 );
+//    aGame.dump();
+   }
+
 
 BOOST_AUTO_TEST_SUITE_END()
 

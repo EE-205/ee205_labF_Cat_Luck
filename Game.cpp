@@ -87,7 +87,8 @@ bool Game::validateTickets( [[maybe_unused]] const unsigned long newTickets ) {
 Game::Game( const uint8_t newBalls
            ,const uint8_t newDraws
            ,const unsigned long newTickets ) : head { nullptr }
-                                             , winningDraw { nullptr } {
+                                             , winningDraw { nullptr }
+                                             , showProgress { 0 } {
    if( validateBalls( newBalls) ) {
       balls = newBalls;
    }
@@ -106,6 +107,22 @@ Game::~Game() {
       delete winningDraw;
       winningDraw = nullptr;
    }
+}
+
+
+/// Getter for #Game::showProgress
+///
+/// @return #Game::showProgress
+unsigned long Game::getShowProgress() const {
+   return showProgress;
+}
+
+
+/// Setter for #Game::showProgress
+///
+/// @param showProgress The value to set.  `0` (default) disables printing progress.
+void Game::setShowProgress( unsigned long showProgress ) {
+   Game::showProgress = showProgress;
 }
 
 
@@ -177,8 +194,10 @@ void Game::buyAllLotteryTickets() {
 
    /// Put the first lottery ticket in #Game.head
    head = new Node( *this );
-   printf( "Head\n" );
-   head->dump();
+// printf( "Head\n" );
+// head->dump();
+
+   unsigned int progress = showProgress;
 
    for( unsigned long i = 1 ; i < tickets ; i++ ) {
       Node* ticket = new Node( *this );
@@ -186,13 +205,34 @@ void Game::buyAllLotteryTickets() {
 
       ticket->add( *head );
 
-      printf( "." );
+      if( progress-- == 1 ) {  // This is efficient, but will print a `.` when showProgress is near `UINT_MAX`
+         cout << '.';
+         progress = showProgress;
+      }
    }
 
-   head->dumpInOrder();
+// head->dumpInOrder();
 }
 
 
-unsigned int Game::countWinningTickets() {
-   return 0;
+/// Get the number of winning tickets in the Game
+///
+/// @return The number of winning tickets (matching Draw objects) in the Game
+unsigned int Game::countWinningTickets() const {
+   if (winningDraw == nullptr) {
+      /// @throws logic_error Attempt to count winning tickets before drawing the winning ticket
+      throw logic_error("Attempt to count winning tickets before drawing the winning ticket");
+   }
+
+   if (head == nullptr) {
+      /// @throws logic_error Attempt to count winning tickets before buying tickets
+      throw logic_error("Attempt to count winning tickets before buying tickets");
+   }
+
+   Node *aNode = head->getNode(*winningDraw);
+   if (aNode == nullptr) {
+      return 0;
+   } else {
+      return aNode->count;
+   }
 }

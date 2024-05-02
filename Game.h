@@ -20,8 +20,8 @@
 #include "Draw.h"
 
 
-/// Represents a single Lottery game.  Once the initial paramters of the game
-/// are established, they can't be changed.  The game, however, can be payed
+/// Represents a single Lottery game.  Once the initial parameters of the game
+/// are established, they can't be changed.  The game, however, can be played
 /// repeatedly.
 class Game {
 private:  // /////////////////////// Private Class ///////////////////////////
@@ -48,29 +48,33 @@ private:  // /////////////////////// Private Class ///////////////////////////
                             , count{ 1 } {}
 
    public:  // /////////////////////// Public Methods /////////////////////////
-      void add( Node& root ) {
-         if( *this == root ) {
+      /// Add a Node to a Binary Search Tree (BST)
+      ///
+      /// @param tryAddingHere Try to add the node here using BST
+      void add( Node& tryAddingHere ) {
+         if( *this == tryAddingHere ) {
             count++;
-//          printf( "Found duplicate... increment root\n" );
-         } else if ( *this < root ) {
-            if( root.left == nullptr ) {
-               root.left = this;
-//             printf( "Attach to root.left\n" );
+//          printf( "Found duplicate... increment the Node\n" );
+         } else if (*this < tryAddingHere ) {
+            if(tryAddingHere.left == nullptr ) {
+               tryAddingHere.left = this;
+//             printf( "Attach to the left\n" );
             } else {
-//             printf( "Descend down root.left\n" );
-               add( *root.left );
+//             printf( "Descend down the left branch\n" );
+               add( *tryAddingHere.left );
             }
          } else {
-            if( root.right == nullptr ) {
-               root.right = this;
-//             printf( "Attach to root.right\n" );
+            if(tryAddingHere.right == nullptr ) {
+               tryAddingHere.right = this;
+//             printf( "Attach to right\n" );
             } else {
-//             printf( "Descend down root.right\n" );
-               add( *root.right );
+//             printf( "Descend down the right branch\n" );
+               add( *tryAddingHere.right );
             }
          }
       }
 
+      /// Dump the Node objects using a BST in-order traversal
       void dumpInOrder() {
          if( left != nullptr ) {
             left->dumpInOrder();
@@ -82,6 +86,29 @@ private:  // /////////////////////// Private Class ///////////////////////////
             right->dumpInOrder();
          }
       }
+
+      /// Find a Node/Draw in a BST.
+      ///
+      /// @param findThisDraw The Draw to search for
+      /// @return If the Draw is in the BST, return a pointer to the Node that owns it.  If it's not in the BST, return `nullptr`.
+      Node* getNode( Draw& findThisDraw ) {
+         if( *this == findThisDraw ) {
+            return this;
+         } else if( *this < findThisDraw ) {
+            if( left == nullptr ) {
+               return nullptr;
+            } else {
+               left->getNode( findThisDraw );
+            }
+         } else {
+            if( right == nullptr ) {
+               return nullptr;
+            } else {
+               right->getNode( findThisDraw );
+            }
+         }
+         return nullptr;
+      }
    };
 
 private:  // /////////////////////// Private Members ///////////////////////////
@@ -90,7 +117,12 @@ private:  // /////////////////////// Private Members ///////////////////////////
    unsigned long tickets;      ///< The number of customers who buy a lottery ticket
    Node*         head;         ///< Pointer to the head of a BST containing all tickets
    Draw*         winningDraw;  ///< Pointer to the winning Draw
+   unsigned long showProgress; ///< Print `.` after this number of tickets.
+public:
+   unsigned long getShowProgress() const;
 
+   void setShowProgress(unsigned long showProgress);
+   ///< During buyAllLotteryTickets(), print a `.` every `showProgress` draws.  If `0`, then don't show any progress.
 
 public:  // ///////////////////////// Static Methods ///////////////////////////
    static bool validateBalls( uint8_t newBalls );
@@ -115,11 +147,11 @@ public:  // /////////////////////// Getters & Setters //////////////////////////
 
 
 public:  // ///////////////////////// Public Methods ///////////////////////////
-   void buyAllLotteryTickets();
-   void makeWinningDraw();
-   unsigned int countWinningTickets();
+   void         buyAllLotteryTickets();
+   void         makeWinningDraw();
+   unsigned int countWinningTickets() const;
 
    bool validate() const;
-   void dump() const;
+   void dump()     const;
 
 };
