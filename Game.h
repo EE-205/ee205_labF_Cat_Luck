@@ -51,7 +51,7 @@ private:  // /////////////////////// Private Class ///////////////////////////
       /// @param tryAddingHere Try to add the node here using BST
       void add( Node& tryAddingHere ) {
          if( *this == tryAddingHere ) {
-            count++;
+            tryAddingHere.count++;
 //          printf( "Found duplicate... increment the Node\n" );
          } else if (*this < tryAddingHere ) {
             if(tryAddingHere.left == nullptr ) {

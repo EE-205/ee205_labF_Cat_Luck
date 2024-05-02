@@ -88,6 +88,24 @@ BOOST_AUTO_TEST_SUITE( test_Game )
 //    aGame.dump();
    }
 
+   BOOST_AUTO_TEST_CASE( test_countWinningTickets ) {
+      for( int i = 1 ; i <= MAX_DRAWS ; i++ ) {
+         for( unsigned char j = 0 ; j < 10 ; j++ ) {
+            unsigned long tickets = 1 << j;
+//          printf( "j=%d  tickets: %lu\n", j, tickets );
+
+            Game aGame( i, i, tickets );
+            BOOST_CHECK_THROW( aGame.countWinningTickets(), logic_error );
+            BOOST_CHECK_NO_THROW( aGame.buyAllLotteryTickets() );
+            BOOST_CHECK_THROW( aGame.countWinningTickets(), logic_error );
+            BOOST_CHECK_NO_THROW( aGame.makeWinningDraw() );
+
+            BOOST_CHECK_EQUAL( aGame.countWinningTickets(), tickets );
+         }
+      }
+   }
+
+
 
 BOOST_AUTO_TEST_SUITE_END()
 
