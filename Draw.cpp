@@ -128,12 +128,14 @@ bool Draw::validate() const {
       if( current >= draw.each[ i ] ) {
          game.dump();
          dump();
+         /// @throws logic_error If Draws are out of order
          throw logic_error( "Draws are out of order" );
       }
 
       if( draw.each[ i ] >= balls ) {
          game.dump();
          dump();
+         /// @throws logic_error If a ball is too large
          throw logic_error( "A ball is too large" );
       }
       current = draw.each[ i ];
@@ -232,4 +234,3 @@ bool Draw::operator < ( const Draw& rhs_draw ) const {
 // printf( "lhs is not < rhs\n" );
    return false;
 }
-

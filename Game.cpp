@@ -6,8 +6,6 @@
 //
 /// Define the Game class
 ///
-/// @todo Find all exceptions and make sure they have an @throws
-///
 /// @file   Game.cpp
 /// @author TODO <TODO@hawaii.edu>
 ///////////////////////////////////////////////////////////////////////////////
@@ -71,7 +69,8 @@ bool Game::validateDraws( const uint8_t newBalls, const uint8_t newDraws ) {
 ///
 /// @param newTickets The proposed number of tickets issued in this Game
 /// @return `true` if `newTickets` is acceptable
-bool Game::validateTickets( [[maybe_unused]] const unsigned long newTickets ) {
+/// @throws invalid_argument if `newTickets` is outside of legal values
+bool Game::validateTickets( const unsigned long newTickets ) {
    if( newTickets < 1 ) {
       throw invalid_argument( "Game.tickets must be >= 1" );
    }
@@ -129,6 +128,7 @@ void Game::setShowProgress( unsigned long showProgress ) {
 /// Draw a special ticket
 void Game::makeWinningDraw() {
    if( winningDraw != nullptr ) {
+      /// @throws logic_error Attempt to repeat a winning draw.  Each Game gets only one draw.
       throw logic_error( "Attempt to repeat a winning draw.  Each Game gets only one draw!" );
    }
    winningDraw = new Draw( *this );
