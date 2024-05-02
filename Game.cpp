@@ -189,5 +189,10 @@ void Game::buyAllLotteryTickets() {
       printf( "." );
    }
 
-   head->dumpInOrder( head );
+   head->dumpInOrder();
+}
+
+
+unsigned int Game::countWinningTickets() {
+   return 0;
 }

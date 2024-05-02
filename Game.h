@@ -71,15 +71,16 @@ private:  // /////////////////////// Private Class ///////////////////////////
          }
       }
 
-      void dumpInOrder( Node* node ) {
-         if( node == nullptr ) {  // Base case
-            return;
+      void dumpInOrder() {
+         if( left != nullptr ) {
+            left->dumpInOrder();
          }
-         node->left->dumpInOrder( node->left );
-         PRINT_CLASS_FOR_DUMP();
-         FORMAT_LINE_FOR_DUMP( "Node", "count" ) << count << '\n' ;
          Draw::dump();
-         node->right->dumpInOrder( node->right );
+//       PRINT_CLASS_FOR_DUMP();
+         FORMAT_LINE_FOR_DUMP( "Node", "count" ) << count << '\n' ;
+         if( right != nullptr ) {
+            right->dumpInOrder();
+         }
       }
    };
 
@@ -116,6 +117,7 @@ public:  // /////////////////////// Getters & Setters //////////////////////////
 public:  // ///////////////////////// Public Methods ///////////////////////////
    void buyAllLotteryTickets();
    void makeWinningDraw();
+   unsigned int countWinningTickets();
 
    bool validate() const;
    void dump() const;
