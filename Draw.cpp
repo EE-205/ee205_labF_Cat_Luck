@@ -14,13 +14,13 @@
 #include <climits>    // For UCHAR_MAX
 #include <cstdint>    // For uint8_t
 #include <cstring>    // For memset
-#include <iomanip>    // For setw
+#include <iomanip>    // For setw setfill
 #include <sstream>    // For ostringstream
-#include <stdexcept>  // For invalid_argument
+#include <stdexcept>  // For logic_error
 
 #include "Draw.h"  // For obvious reasons
 
-#include "Game.h"
+#include "Game.h"  // For Game
 
 using namespace std;
 

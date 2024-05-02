@@ -15,12 +15,11 @@
 #include <cassert>    // For assert
 #include <cstdint>    // For uint8_t
 #include <iostream>   // For cout
-#include <ostream>    // For endl
-#include <stdexcept>  // For invalid_argument
+#include <stdexcept>  // For invalid_argument logic_error
 
-#include "Game.h"
+#include "Game.h"     // For obvious reasons
 
-#include "Draw.h"
+#include "Draw.h"     // For Draw
 
 using namespace std;
 

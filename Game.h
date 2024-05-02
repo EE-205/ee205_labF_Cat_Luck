@@ -11,13 +11,11 @@
 ///////////////////////////////////////////////////////////////////////////////
 #pragma once
 
-#include <cassert>    // For assert
 #include <cstdint>    // For uint8_t
-#include <stdexcept>  // For invalid_argument
 
-#include "config.h"   // For application-level tools
+#include "config.h"   // For application configuration
 
-#include "Draw.h"
+#include "Draw.h"     // For Draw
 
 
 /// Represents a single Lottery game.  Once the initial parameters of the game
