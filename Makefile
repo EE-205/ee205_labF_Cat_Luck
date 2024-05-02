@@ -35,7 +35,7 @@ Game.o: Game.cpp Game.h
 Draw.o: Draw.cpp Draw.h
 	$(CC) $(CFLAGS) -c $<
 
-Sim.o: Sim.cpp Sim.h
+Sim.o: Sim.cpp
 	$(CC) $(CFLAGS) -c $<
 
 $(TARGET): Game.o Draw.o Sim.o
