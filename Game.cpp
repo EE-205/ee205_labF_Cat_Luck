@@ -206,7 +206,7 @@ void Game::buyAllLotteryTickets() {
       ticket->add( *head );
 
       if( progress-- == 1 ) {  // This is efficient, but will print a `.` when showProgress is near `UINT_MAX`
-         cout << '.';
+         cout << '.' << flush;
          progress = showProgress;
       }
    }

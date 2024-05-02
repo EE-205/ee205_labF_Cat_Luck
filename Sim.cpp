@@ -12,8 +12,7 @@
 
 #include <iostream>
 
-#include "Sim.h"
-
+#include "Game.h"
 
 using namespace std;
 
@@ -21,7 +20,32 @@ using namespace std;
 ///
 /// @return The return value for the program
 int main() {
-   cout << "Simulation\n";
+   unsigned int  numRuns    =       52;
+   unsigned long numWinners =        0;
+
+   unsigned long numTickets =  100000;
+   int           numBalls   =       10;
+   int           numDraws   =        3;
+
+//   cout << unitbuf;  // Print `.` incrementally using unbuffered output
+
+   for( unsigned int i = 0 ; i < numRuns ; i++ ) {
+      Game aGame = Game( numBalls, numDraws, numTickets );
+      aGame.setShowProgress( 10000 );
+      aGame.buyAllLotteryTickets();
+      aGame.makeWinningDraw();
+      numWinners += aGame.countWinningTickets();
+      cout << '\n';
+   }
+
+   cout.imbue( locale("") );  // Print numbers with commas
+
+   cout << numTickets << " people played an "
+        << numDraws << "-draw lottery from a pool of "
+        << numBalls << " numbers.\n";
+
+   cout << "In " << numRuns << " games, there were "
+        << numWinners << " winners.\n";
 
    return 0;
 }
