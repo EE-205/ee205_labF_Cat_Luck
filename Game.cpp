@@ -6,6 +6,17 @@
 //
 /// Define the Game class
 ///
+/// The Game can consume a lot of memory.  In C++, when `new` fails it should
+/// throws a [bad_alloc](https://en.cppreference.com/w/cpp/memory/new/bad_alloc)
+/// exception.
+///
+/// However, in modern C++ and certain operating systems (Like 64-bit Linux),
+/// when systems run out of memory, the OS kills the process before an exception
+/// can be thrown.  @see https://accu.org/journals/overload/31/176/wu/
+///
+/// Therefore, we do not make any attempt to try/catch nor recover from a Game
+/// that exceeds the available physical memory + swap.
+///
 /// @file   Game.cpp
 /// @author TODO <TODO@hawaii.edu>
 ///////////////////////////////////////////////////////////////////////////////
@@ -30,7 +41,7 @@ using namespace std;
 /// @throws invalid_argument if `newBalls` is outside of legal values
 bool Game::validateBalls( const uint8_t newBalls ) {
    if( newBalls < MIN_BALLS ) {
-      throw invalid_argument( "balls must be >= " STR( MIN_BALLS ) );
+      throw invalid_argument( "Game.balls must be >= " STR( MIN_BALLS ) );
    }
    if( newBalls > MAX_BALLS ) {
       throw invalid_argument( "Game.balls must be <= " STR( MAX_BALLS ) );
