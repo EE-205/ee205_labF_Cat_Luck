@@ -14,13 +14,16 @@
 #include <climits>    // For UCHAR_MAX
 #include <cstdint>    // For uint8_t
 
-#include "config.h"   // For application-level tools
+#include "config.h"   // For application configuration
 
 
 /// Represents one Draw in a Game
+///
+/// A Draw may be one of many tickets purchased by customers, or it may be the
+/// one winning Draw of the Game
 class Draw {
 private:  // /////////////////////// Private Members ///////////////////////////
-   const Game& game;  ///< The game associated with this Draw
+   const Game& game;  ///< The Game associated with this Draw
 
 
 protected:  // //////////////////// Protected Members //////////////////////////
@@ -44,7 +47,7 @@ public:  // /////////////////// Constructors & Destructors /////////////////////
 
 public:  // ///////////////////////// Public Methods ///////////////////////////
    bool validate() const;
-   void dump() const;
+   void dump()     const;
 
 
 public:  // /////////////////////// Operator Overrides /////////////////////////

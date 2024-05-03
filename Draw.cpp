@@ -18,9 +18,9 @@
 #include <sstream>    // For ostringstream
 #include <stdexcept>  // For logic_error
 
-#include "Draw.h"  // For obvious reasons
+#include "Draw.h"     // For obvious reasons
 
-#include "Game.h"  // For Game
+#include "Game.h"     // For Game
 
 using namespace std;
 
@@ -41,22 +41,22 @@ Draw::Draw( const Game& newGame ) : game( newGame ) {
    memset( pool, 0, sizeof( pool ) );       //   0 means they number/ball is in the pool
 
    const uint8_t balls = newGame.getBalls();
-//printf( "===\n" );
+
    for( int i = 0 ; i < game.getDraws() ; i++ ) {
       /// - Get a random index into the pool
-      /// - If that index has been drawn (pool[r] != 0, iterate forward (and
-      ///   wrap if necessary) until we find an unused number.
+      /// - If that index has been drawn (pool[r] != 0, iterate forward
+      ///   (wrap if necessary) until an unused number (== 0) is found.
       uint8_t randIndex = getRandom8( balls );
-//printf( "r %d  ", randIndex );
+//    printf( "r %d  ", randIndex );
 
       while( pool[ randIndex ] != 0 ) {
-//printf( "pool[%d]=%d  ", randIndex, pool[randIndex] );
+//       printf( "pool[%d]=%d  ", randIndex, pool[randIndex] );
          randIndex = ( (randIndex+1) >= balls ) ? 0 : (randIndex + 1);
-//printf( "randIndex %d  ", randIndex );
+//       printf( "randIndex %d  ", randIndex );
       }
       assert( pool[ randIndex ] == 0 );
       pool[ randIndex ] = 1;
-//printf( "DDD %d  balls=%d\n", randIndex, balls );
+//    printf( "Draw randIndex: %d  balls: %d\n", randIndex, balls );
    }
 
    int found = 0;
@@ -90,8 +90,8 @@ uint8_t Draw::getRandom8( uint8_t balls ) {
        "jnc    try_again;"
        "AND    ax, 0x00FF;"   // Ensure the random number is <= 255
        "mov    cl, %[balls];"
-       "div    cl;"
-       "mov    %[rval], ah;"
+       "div    cl;"           // Use integer division
+       "mov    %[rval], ah;"  // Return the modulus (remainder) of the division
       :[rval] "=r" ( rval )   // Output
       :[balls] "r" ( balls )  // Input
       :"ax", "cl", "cc"   );  // Clobbers
@@ -173,7 +173,7 @@ void Draw::dump() const {
 Draw& Draw::operator = ( const Draw& rhs_draw ) {
    assert( &game == &rhs_draw.game );  /// Assert that the two Draw objects come from the same Game
 
-   // Protect against self-copy
+   /// Protect against self-copy
    if (this == &rhs_draw ) {
       return *this;
    }
@@ -222,15 +222,12 @@ bool Draw::operator < ( const Draw& rhs_draw ) const {
       const int rhs = rhs_draw.draw.each[i];
 //    printf( "i = %d   left = %d   right %d\n", i, lhs, rhs );
       if( lhs < rhs ) {
-//       printf( "lhs is < rhs\n");
          return true;
       }
       if( lhs > rhs ) {
-//       printf( "lhs is not > rhs\n" );
          return false;
       }
    }
 
-// printf( "lhs is not < rhs\n" );
    return false;
 }
