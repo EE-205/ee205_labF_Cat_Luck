@@ -165,8 +165,6 @@ bool Game::validate() const {
 
 /// Print the internal state of the Game
 ///
-/// @todo balls & draws are not printing
-///
 ///     Object              class               Game
 ///     Object              this                0x7ffc6260c718
 ///     Game                balls               16
