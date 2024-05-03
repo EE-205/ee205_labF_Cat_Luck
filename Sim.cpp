@@ -4,13 +4,14 @@
 //
 //  Cats make their own luck
 //
-/// Define the Sim class
+/// The main() program that drives the simulation
 ///
 /// @file   Sim.cpp
 /// @author TODO <TODO@hawaii.edu>
 ///////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include <iostream>  // For cout
+#include <locale>    // For locale
 
 #include "Game.h"
 
