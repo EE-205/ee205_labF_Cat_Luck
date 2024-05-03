@@ -50,6 +50,10 @@ bool Game::validateBalls( const uint8_t newBalls ) {
 bool Game::validateDraws( const uint8_t newBalls, const uint8_t newDraws ) {
    assert( validateBalls( newBalls ) );
 
+   if( newDraws < 1 ) {
+      throw invalid_argument( "Game.draws must be >= 1" );
+   }
+
    if( newDraws > newBalls ) {
       throw invalid_argument( "Game.draws must be <= Game.balls" );
    }
@@ -159,10 +163,20 @@ bool Game::validate() const {
 ///     Game                tickets             1000
 ///
 void Game::dump() const {
+   PRINT_HEADING_FOR_DUMP;
+
    PRINT_CLASS_FOR_DUMP();
    FORMAT_LINE_FOR_DUMP( "Game", "balls" )   << +balls   << '\n' ;
    FORMAT_LINE_FOR_DUMP( "Game", "draws" )   << +draws   << '\n' ;
    FORMAT_LINE_FOR_DUMP( "Game", "tickets" ) << +tickets << '\n' ;
+
+   if( head == nullptr ) {
+      FORMAT_LINE_FOR_DUMP( "Game", "head" ) << "--" << '\n' ;
+   } else {
+      FORMAT_LINE_FOR_DUMP( "Game", "head" ) << " " << '\n' ;
+      head->dump();
+   }
+
    if( winningDraw == nullptr ) {
       FORMAT_LINE_FOR_DUMP( "Game", "winningDraw" ) << "--" << '\n' ;
    } else {
@@ -170,11 +184,16 @@ void Game::dump() const {
       winningDraw->dump();
    }
 
+   PRINT_HEADING_FOR_DUMP;
+
    if( head == nullptr ) {
       FORMAT_LINE_FOR_DUMP( "Game", "tickets" ) << "--" << '\n' ;
    } else {
       FORMAT_LINE_FOR_DUMP( "Game", "tickets" ) << " " << '\n' ;
+      head->dumpInOrder();
    }
+
+   PRINT_HEADING_FOR_DUMP;
 }
 
 
@@ -194,8 +213,6 @@ void Game::buyAllLotteryTickets() {
 
    /// Put the first lottery ticket in #Game.head
    head = new Node( *this );
-// printf( "Head\n" );
-// head->dump();
 
    unsigned int progress = showProgress;
 
@@ -219,18 +236,20 @@ void Game::buyAllLotteryTickets() {
 ///
 /// @return The number of winning tickets (matching Draw objects) in the Game
 unsigned int Game::countWinningTickets() const {
-   if (winningDraw == nullptr) {
+   if( winningDraw == nullptr ) {
       /// @throws logic_error Attempt to count winning tickets before drawing the winning ticket
       throw logic_error("Attempt to count winning tickets before drawing the winning ticket");
    }
 
-   if (head == nullptr) {
+   if( head == nullptr ) {
       /// @throws logic_error Attempt to count winning tickets before buying tickets
       throw logic_error("Attempt to count winning tickets before buying tickets");
    }
 
    Node *aNode = head->getNode(*winningDraw);
    if (aNode == nullptr) {
+   Node *aNode = head->getNode( *winningDraw );
+   if( aNode == nullptr ) {
       return 0;
    }
    return aNode->count;
