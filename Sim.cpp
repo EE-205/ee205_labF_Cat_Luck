@@ -20,18 +20,17 @@ using namespace std;
 ///
 /// @return The return value for the program
 int main() {
-   unsigned int  numRuns    =       52;
-   unsigned long numWinners =        0;
+   unsigned int  numRuns    =         52;  // One draw per week for 1 year
 
-   unsigned long numTickets =  100000;
-   int           numBalls   =       10;
-   int           numDraws   =        3;
+   unsigned long numTickets =  132000000;  // The size of a large PowerBall drawing
+   int           numBalls   =         69;  // Powerball balls range from 1 to 69
+   int           numDraws   =          5;  // Powerball draws 5 balls per game
 
-//   cout << unitbuf;  // Print `.` incrementally using unbuffered output
+   unsigned long numWinners =          0;  // Accumulate the number of winners here
 
    for( unsigned int i = 0 ; i < numRuns ; i++ ) {
       Game aGame = Game( numBalls, numDraws, numTickets );
-      aGame.setShowProgress( 10000 );
+      aGame.setShowProgress( 50000 );
       aGame.buyAllLotteryTickets();
       aGame.makeWinningDraw();
       numWinners += aGame.countWinningTickets();
