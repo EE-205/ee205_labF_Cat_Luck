@@ -17,8 +17,7 @@ TARGET = sim
 all: $(TARGET)
 
 CC        = clang++
-#CFLAGS    = -Wall -Wextra -Werror -march=native -mtune=native -masm=intel $(DEBUG_FLAGS)
-CFLAGS    = -Wall -Wextra -march=native -mtune=native -masm=intel $(DEBUG_FLAGS)
+CFLAGS    = -Wall -Wextra -Werror -march=native -mtune=native -masm=intel $(DEBUG_FLAGS)
 LINT      = clang-tidy
 LINTFLAGS = --quiet
 
