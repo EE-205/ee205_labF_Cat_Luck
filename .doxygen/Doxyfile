@@ -996,7 +996,7 @@ INPUT_FILE_ENCODING    =
 # *.f18, *.f, *.for, *.vhd, *.vhdl, *.ucf, *.qsf and *.ice.
 
 FILE_PATTERNS          = *.cpp \
-                         *.h \
+                         *.h   \
                          *.md
 
 # The RECURSIVE tag can be used to specify whether or not subdirectories should
@@ -1246,7 +1246,7 @@ CLANG_ADD_INC_PATHS    = YES
 # specified with INPUT and INCLUDE_PATH.
 # This tag requires that the tag CLANG_ASSISTED_PARSING is set to YES.
 
-CLANG_OPTIONS          = "-I/usr/lib/clang/16/include/" \
+CLANG_OPTIONS          = "-I/usr/lib/clang/17/include/" \
                          "-I/usr/include/llvm/" \
                          "-I/usr/include/linux/"
 
