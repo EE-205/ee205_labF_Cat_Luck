@@ -5,7 +5,7 @@
       <paths name="Popoki (6d09ea1a-5d55-4436-b3c6-57a8673ae77f)">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/marknels/src/src-clion/ee205_labF_cat_luck" local="$PROJECT_DIR$" />
+            <mapping deploy="src/src-clion/ee205_labF_cat_luck" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>
