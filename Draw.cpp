@@ -128,8 +128,8 @@ bool Draw::validate_static() {
 bool Draw::validate() const {
    game.validate();
 
-   const int draws = game.getDraws();
-   const int balls = game.getBalls();
+   const uint8_t draws = game.getDraws();
+   const uint8_t balls = game.getBalls();
 
    int current = -1;
    for( int i = 0 ; i < draws ; i++ ) {
@@ -227,8 +227,8 @@ bool Draw::operator != ( const Draw& rhs_draw ) const {
 /// @return `true` if the left Draw object is less than the right... `false` if not
 bool Draw::operator < ( const Draw& rhs_draw ) const {
    for( int i = 0 ; i < game.getDraws() ; i++ ) {
-      const int lhs = draw.each[i];
-      const int rhs = rhs_draw.draw.each[i];
+      const uint8_t lhs = draw.each[i];
+      const uint8_t rhs = rhs_draw.draw.each[i];
 //    printf( "i = %d   left = %d   right %d\n", i, lhs, rhs );
       if( lhs < rhs ) {
          return true;
