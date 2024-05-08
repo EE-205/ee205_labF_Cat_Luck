@@ -145,7 +145,7 @@ unsigned long Game::getShowProgress() const {
 /// Setter for #Game::showProgress
 ///
 /// @param showProgress The value to set.  `0` (default) disables printing progress.
-void Game::setShowProgress( unsigned long showProgress ) {
+void Game::setShowProgress( const unsigned long showProgress ) {
    Game::showProgress = showProgress;
 }
 

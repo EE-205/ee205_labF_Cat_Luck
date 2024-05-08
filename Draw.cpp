@@ -83,7 +83,7 @@ Draw::Draw( const Draw& rhs_draw ) : game{ rhs_draw.game }, draw { rhs_draw.draw
 /// @param balls The number of balls in the Game
 ///
 /// @return An 8-bit random number between `0` and `balls-1`
-uint8_t Draw::getRandom8( uint8_t balls ) {
+uint8_t Draw::getRandom8( const uint8_t balls ) {
    uint8_t rval;
 
    asm volatile (
