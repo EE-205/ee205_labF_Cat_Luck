@@ -153,11 +153,7 @@ private:  // /////////////////////// Private Members ///////////////////////////
    Node*         bstHead;      ///< Pointer to the head of a BST containing all tickets
    Draw*         winningDraw;  ///< Pointer to the winning Draw
    unsigned long showProgress; ///< Print `.` after this number of tickets.
-public:
-   unsigned long getShowProgress() const;
 
-   void setShowProgress( unsigned long showProgress);
-   ///< During buyAllLotteryTickets(), print a `.` every #Game::showProgress draws.  If `0`, then don't show any progress.
 
 public:  // ///////////////////////// Static Methods ///////////////////////////
    static bool validateBalls( uint8_t newBalls );
@@ -179,6 +175,9 @@ public:  // /////////////////////// Getters & Setters //////////////////////////
 
    /// @return The number of customers who buy a lottery ticket
    unsigned long getTickets() const { return tickets; };
+
+   unsigned long getShowProgress() const;
+   void setShowProgress( unsigned long showProgress);
 
 
 public:  // ///////////////////////// Public Methods ///////////////////////////
