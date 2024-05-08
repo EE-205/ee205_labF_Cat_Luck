@@ -27,6 +27,9 @@ private:  // /////////////////////// Private Class ///////////////////////////
    ///
    /// If a Game has multiple tickets with the same Draw, count indicates how
    /// many
+   ///
+   /// @todo In retrospect, I regret embedding this in Game.  Next time, I'll
+   ///       put Node in its own file.
    class Node : public Draw {
    friend Game;  ///< The Game class is a friend of Node
 
