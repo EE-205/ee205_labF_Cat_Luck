@@ -1,32 +1,57 @@
-Lucky Cat
-=========
+Cat Luck
+========
 
 <img src=".doxygen/images/logo_Luck_1484_1330.png" style="width:300px; float: left; margin: 0 10px 10px 0;" alt="Lucky Cat"/>
 
 Cats make their own luck
 
 #### Links
-The project's home page:  https://github.com/marknelsonengineer-sp23/sre_lab4_memscan  (hosted by GitHub)
+The project's home page:
+ https://github.com/EE-205/ee205_labF_cat_luck 
+ (hosted by GitHub)
 
-The source code is documented at:  https://www2.hawaii.edu/~marknels/sre/memscan  (hosted by The University of Hawaii at Mnoa)
+The source code is documented at:
+ https://www2.hawaii.edu/~marknels/ee205/ee205_labF_cat_luck 
+(hosted by The University of Hawaiʻi at Mānoa)
 
-# Lucky Cat
-Lorem ipsum
+# Cat Luck
+| Name                      | Value        |
+|---------------------------|--------------|
+| Estimated time to compete | 4 hours      |
+| Point value               | Extra credit |
+| Prerequisites             | EE 205       |
+| Link                      | TBD          |
+
+The goal of this lab is to:
+  1. Write a simulation in C++
+
+We are going to simulate a lottery (or lotto) which is a game where a group of
+people pick a set of numbers in an attempt to match their set with a random 
+drawing for a prize.
+
+## Rules
+  - When a ball (a number) is drawn, it is not returned... In other words, no 
+    duplicate numbers (within a drawing).
+  - It is, however, possible for two independent drawings to draw the same set 
+    of numbers... in fact, if you match the "winning draw", then you win.
+  - The order of the draw is not significant
+  - No "bonus numbers"
 
 
 # Makefile {#MakeTargets}
 This simulation uses the following `Makefile` targets:
 
-| Command        | Purpose                                                   |
-|----------------|-----------------------------------------------------------|
-| `make`         | Compile (with clang++)                                    |
-| `make run`     | Compile and run it                                        |
-| `make test`    | Compile and do a Boost unit test on it                    |
-| `make debug`   | Compile with debug mode ( `DEBUG` is defined)             |
-| `make clean`   | Remove all compiler-generated files                       |
-| `make doc`     | Make a Doxygen website                                    |
-| `make lint`    | Use `clang-tidy` to do static analysis on the source code |
-| `make valgrind`| Use `valgrind` to do dynamic analysis on the source code  |
+| Command              | Purpose                                                        |
+|----------------------|----------------------------------------------------------------|
+| `make`               | Compile (with clang++)                                         |
+| `make run`           | Compile and run it                                             |
+| `make test`          | Compile and run the Boost unit tests                           |
+| `make debug`         | Compile with debug mode ( `DEBUG` is defined)                  |
+| `make clean`         | Remove all compiler-generated files                            |
+| `make doc`           | Make a Doxygen website                                         |
+| `make lint`          | Use `clang-tidy` to do static analysis on the source code      |
+| `make valgrind`      | Use `valgrind` to do dynamic analysis on a run                 |
+| `make test-valgrind` | Use `valgrind` to do dynamic analysis on a Boost unit test run |
 
 
 # Toolchain
