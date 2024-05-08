@@ -12,7 +12,7 @@
 #pragma once
 
 #include <climits>    // For UCHAR_MAX
-#include <cstdint>    // For uint8_t
+#include <cstdint>    // For uint8_t uint64_t
 
 #include "config.h"   // For application configuration
 

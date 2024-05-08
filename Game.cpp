@@ -23,7 +23,7 @@
 
 #include <cassert>    // For assert
 #include <cstdint>    // For uint8_t
-#include <iostream>   // For cout
+#include <iostream>   // For cout flush
 #include <stdexcept>  // For invalid_argument logic_error
 
 #include "Game.h"     // For obvious reasons
