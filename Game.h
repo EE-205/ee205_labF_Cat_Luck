@@ -125,12 +125,13 @@ private:  // /////////////////////// Private Class ///////////////////////////
                return nullptr;
             }
             return( right->getNode( findThisDraw ) );
-         } else {
-            if( left == nullptr ) {
-               return nullptr;
-            }
-            return( left->getNode( findThisDraw ) );
          }
+
+         // *this > findThisDraw
+         if( left == nullptr ) {
+            return nullptr;
+         }
+         return( left->getNode( findThisDraw ) );
       }
    };
 
