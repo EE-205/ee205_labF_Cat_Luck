@@ -50,7 +50,7 @@ int main() {
 
    cout.imbue( locale("") );  // Print numbers with commas
 
-   cout << numTickets << " people played an "
+   cout << numTickets << " people played a "
         << numDraws << "-draw lottery from a pool of "
         << numBalls << " numbers.\n";
 
