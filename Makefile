@@ -48,6 +48,9 @@ doc: $(TARGET)
 	rsync --recursive --mkpath --checksum --delete --compress --stats --chmod=o+r,Do+x .doxygen/images .doxygen/docs/html/.doxygen
 	doxygen .doxygen/Doxyfile
 
+publish: doc
+	rsync --recursive --checksum --delete --compress --stats --chmod=o+r,Do+x .doxygen/docs/html/ marknels@uhunix.hawaii.edu:~/public_html/ee205/ee205_labF_cat_luck
+
 test: $(TARGET)
 	cd tests ; $(MAKE) test
 
