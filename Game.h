@@ -53,8 +53,8 @@ private:  // /////////////////////// Private Class ///////////////////////////
          if( *this == tryAddingHere ) {
             tryAddingHere.count++;
 //          printf( "Found duplicate... increment the Node\n" );
-         } else if (*this < tryAddingHere ) {
-            if(tryAddingHere.left == nullptr ) {
+         } else if ( *this < tryAddingHere ) {
+            if( tryAddingHere.left == nullptr ) {
                tryAddingHere.left = this;
 //             printf( "Attach to the left\n" );
             } else {
@@ -62,7 +62,7 @@ private:  // /////////////////////// Private Class ///////////////////////////
                add( *tryAddingHere.left );
             }
          } else {
-            if(tryAddingHere.right == nullptr ) {
+            if( tryAddingHere.right == nullptr ) {
                tryAddingHere.right = this;
 //             printf( "Attach to right\n" );
             } else {
