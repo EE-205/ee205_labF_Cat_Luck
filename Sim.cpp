@@ -25,7 +25,7 @@ int main() {
 
    assert( Draw::validate_static() );
 
-   const unsigned int  numRuns      =      4;  /// - Three draws per week for 1 year
+   const unsigned int  numRuns      =          3;  /// - Three draws per week for 1 year
    const unsigned long showProgress =      50000;  /// - Print a `.` after this many tickets drawn
    const unsigned long numTickets   =   21417741;  /// - The size of an average PowerBall drawing:  https://lottoreport.com/ticketcomparison.htm
    const int           numBalls     =         69;  /// - Powerball balls range from 1 to 69
