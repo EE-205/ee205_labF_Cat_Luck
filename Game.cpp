@@ -144,6 +144,9 @@ unsigned long Game::getShowProgress() const {
 
 /// Setter for #Game::showProgress
 ///
+/// During buyAllLotteryTickets(), print a `.` every #Game::showProgress draws.
+/// If `0`, then don't show any progress.
+///
 /// @param showProgress The value to set.  `0` (default) disables printing progress.
 void Game::setShowProgress( const unsigned long showProgress ) {
    Game::showProgress = showProgress;
@@ -231,7 +234,7 @@ void Game::buyAllLotteryTickets() {
       throw logic_error( "Attempt to buy more lottery tickets after buying them all already!" );
    }
 
-   /// Put the first lottery ticket in #Game.head
+   /// Put the first lottery ticket in #Game.bstHead
    bstHead = new Node( *this );
 
    unsigned int progress = showProgress;

@@ -30,6 +30,11 @@ protected:  // //////////////////// Protected Members //////////////////////////
    /// The sorted set of numbers in the Draw
    ///
    /// These are protected, so unit tests can derive and set them
+   ///
+   /// @todo In retrospect, I regret this data structure.  It wastes a ton
+   ///       of space when this scales up.  Next time, I'll do it with a
+   ///       bitfield or linked list (something that better matches the
+   ///       entropy of each Draw).
    union alignas( 8 ) {
       uint8_t  each[ MAX_DRAWS   ];  ///< Each individual Draw
       uint64_t   g8[ MAX_DRAWS/8 ];  ///< A group of 8 Draws
