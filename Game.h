@@ -92,6 +92,25 @@ private:  // /////////////////////// Private Class ///////////////////////////
          }
       }
 
+      /// Delete all Nodes in a Binary Search Tree
+      void deleteAllNodes() {
+         if( left == nullptr && right == nullptr ) {
+            return;
+         }
+         if( left != nullptr ) {
+            left->deleteAllNodes();
+            // printf( "Delete left\n" );
+            delete left;
+            left = nullptr;
+         }
+         if( right != nullptr ) {
+            right->deleteAllNodes();
+            // printf( "Delete right\n" );
+            delete right;
+            right = nullptr;
+         }
+      }
+
       /// Find a Node/Draw in a BST.
       ///
       /// @param findThisDraw The Draw to search for
@@ -136,7 +155,7 @@ public:  // ///////////////////////// Static Methods ///////////////////////////
 
 public:  // /////////////////// Constructors & Destructors /////////////////////
    Game( uint8_t newBalls, uint8_t newDraws, unsigned long newTickets );
-   ~Game();
+   virtual ~Game();
 
 
 public:  // /////////////////////// Getters & Setters //////////////////////////

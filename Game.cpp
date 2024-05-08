@@ -121,6 +121,14 @@ Game::~Game() {
       delete winningDraw;
       winningDraw = nullptr;
    }
+
+   if( head == nullptr ) {
+      return;
+   }
+
+   head->deleteAllNodes();
+   delete head;
+   head = nullptr;
 }
 
 
