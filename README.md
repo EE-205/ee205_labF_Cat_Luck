@@ -38,7 +38,7 @@ drawing for a prize.
   - No "bonus numbers"
 
 
-# Makefile {#MakeTargets}
+# Makefile
 This simulation uses the following `Makefile` targets:
 
 | Command              | Purpose                                                        |
