@@ -102,7 +102,7 @@ bool Game::validateTickets( const unsigned long newTickets ) {
 /// @param newTickets The number of people who will play the Game
 Game::Game( const uint8_t newBalls
            ,const uint8_t newDraws
-           ,const unsigned long newTickets ) : head { nullptr }
+           ,const unsigned long newTickets ) : bstHead { nullptr }
                                              , winningDraw { nullptr }
                                              , showProgress { 0 } {
    if( validateBalls( newBalls) ) {
@@ -124,13 +124,13 @@ Game::~Game() {
       winningDraw = nullptr;
    }
 
-   if( head == nullptr ) {
+   if( bstHead == nullptr ) {
       return;
    }
 
-   head->deleteAllNodes();
-   delete head;
-   head = nullptr;
+   bstHead->deleteAllNodes();
+   delete bstHead;
+   bstHead = nullptr;
 }
 
 
@@ -189,11 +189,11 @@ void Game::dump() const {
    FORMAT_LINE_FOR_DUMP( "Game", "draws" )   << +draws   << '\n' ;
    FORMAT_LINE_FOR_DUMP( "Game", "tickets" ) << +tickets << '\n' ;
 
-   if( head == nullptr ) {
+   if( bstHead == nullptr ) {
       FORMAT_LINE_FOR_DUMP( "Game", "head" ) << "--" << '\n' ;
    } else {
       FORMAT_LINE_FOR_DUMP( "Game", "head" ) << " " << '\n' ;
-      head->dump();
+      bstHead->dump();
    }
 
    if( winningDraw == nullptr ) {
@@ -205,11 +205,11 @@ void Game::dump() const {
 
    PRINT_HEADING_FOR_DUMP;
 
-   if( head == nullptr ) {
+   if( bstHead == nullptr ) {
       FORMAT_LINE_FOR_DUMP( "Game", "tickets" ) << "--" << '\n' ;
    } else {
       FORMAT_LINE_FOR_DUMP( "Game", "tickets" ) << " " << '\n' ;
-      head->dumpInOrder();
+      bstHead->dumpInOrder();
    }
 
    PRINT_HEADING_FOR_DUMP;
@@ -226,13 +226,13 @@ void Game::buyAllLotteryTickets() {
       throw logic_error( "Attempt to buy lottery tickets after the draw!" );
    }
 
-   if( head != nullptr ) {
+   if( bstHead != nullptr ) {
       /// @throws logic_error Attempt to buy more lottery tickets after buying them all already!
       throw logic_error( "Attempt to buy more lottery tickets after buying them all already!" );
    }
 
    /// Put the first lottery ticket in #Game.head
-   head = new Node( *this );
+   bstHead = new Node( *this );
 
    unsigned int progress = showProgress;
 
@@ -240,7 +240,7 @@ void Game::buyAllLotteryTickets() {
       Node* ticket = new Node( *this );
       assert( ticket->validate() );
 
-      ticket->add( *head );
+      ticket->add( *bstHead );
 
       if( progress-- == 1 ) {   /// Print a `.` when showProgress is near `UINT_MAX`
          cout << '.' << flush;  /// Print progress incrementally
@@ -261,12 +261,12 @@ unsigned int Game::countWinningTickets() const {
       throw logic_error("Attempt to count winning tickets before drawing the winning ticket");
    }
 
-   if( head == nullptr ) {
+   if( bstHead == nullptr ) {
       /// @throws logic_error Attempt to count winning tickets before buying tickets
       throw logic_error("Attempt to count winning tickets before buying tickets");
    }
 
-   Node* aNode = head->getNode( *winningDraw );
+   Node* aNode = bstHead->getNode( *winningDraw );
    if( aNode == nullptr ) {
       return 0;
    }

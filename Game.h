@@ -150,7 +150,7 @@ private:  // /////////////////////// Private Members ///////////////////////////
    uint8_t       balls;        ///< The number of balls in this Game
    uint8_t       draws;        ///< The number of balls retrieved in each Draw
    unsigned long tickets;      ///< The number of customers who buy a lottery ticket
-   Node*         head;         ///< Pointer to the head of a BST containing all tickets
+   Node*         bstHead;      ///< Pointer to the head of a BST containing all tickets
    Draw*         winningDraw;  ///< Pointer to the winning Draw
    unsigned long showProgress; ///< Print `.` after this number of tickets.
 public:
