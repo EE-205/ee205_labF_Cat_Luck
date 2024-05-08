@@ -100,18 +100,18 @@ private:  // /////////////////////// Private Class ///////////////////////////
          if( *this == findThisDraw ) {
             return this;
          }
+
          if( *this < findThisDraw ) {
-            if( left == nullptr ) {
-               return nullptr;
-            }
-            left->getNode( findThisDraw );
-         } else {
             if( right == nullptr ) {
                return nullptr;
             }
-            right->getNode( findThisDraw );
+            return( right->getNode( findThisDraw ) );
+         } else {
+            if( left == nullptr ) {
+               return nullptr;
+            }
+            return( left->getNode( findThisDraw ) );
          }
-         return nullptr;
       }
    };
 
