@@ -156,7 +156,7 @@ private:  // /////////////////////// Private Members ///////////////////////////
 public:
    unsigned long getShowProgress() const;
 
-   void setShowProgress( const unsigned long showProgress);
+   void setShowProgress( unsigned long showProgress);
    ///< During buyAllLotteryTickets(), print a `.` every #Game::showProgress draws.  If `0`, then don't show any progress.
 
 public:  // ///////////////////////// Static Methods ///////////////////////////

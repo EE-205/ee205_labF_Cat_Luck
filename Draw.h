@@ -38,7 +38,7 @@ protected:  // //////////////////// Protected Members //////////////////////////
 
 public:  // ///////////////////////// Static Methods ///////////////////////////
    static bool    validate_static();
-   static uint8_t getRandom8( const uint8_t balls );
+   static uint8_t getRandom8( uint8_t balls );
 
 
 public:  // /////////////////// Constructors & Destructors /////////////////////
