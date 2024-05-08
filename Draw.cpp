@@ -92,16 +92,16 @@ uint8_t Draw::getRandom8( const uint8_t balls ) {
    /// @API{ DIV, https://www.felixcloutier.com/x86/div }
 
    asm volatile (
-       "try_again:"
+       "L_try_again:"
           "RDRAND AX;"           /// If `CF==0`, then the `RDRAND` failed... try again
-          "JNC    try_again;"
+          "JNC    L_try_again;"
           "AND    AX, 0x00FF;"   // Ensure the random number is <= 255
           "MOV    CL, %[balls];"
           "DIV    CL;"           // Use integer division
           "MOV    %[rval], AH;"  // Return the modulus (remainder) of the division
-      :[rval] "=r" ( rval )   // Output
-      :[balls] "r" ( balls )  // Input
-      :"ax", "cl", "cc"   );  // Clobbers
+      :[rval] "=r" ( rval )      // Output
+      :[balls] "r" ( balls )     // Input
+      :"ax", "cl", "cc"   );     // Clobbers
 
    return rval;
 }
