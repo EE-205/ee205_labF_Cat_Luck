@@ -31,9 +31,9 @@ private:  // /////////////////////// Private Class ///////////////////////////
    friend Game;  ///< The Game class is a friend of Node
 
    private:  // ///////////////////// Private Members /////////////////////////
-      Node*        left;   ///< The left tree
-      Node*        right;  ///< The right tree
-      unsigned int count;  ///< The number of tickets with this Draw
+      Node*         left;   ///< The left tree
+      Node*         right;  ///< The right tree
+      unsigned long count;  ///< The number of tickets with this Draw
 
    public:  // ///////////////// Constructors & Destructors ///////////////////
       /// Create a new Node
@@ -181,9 +181,9 @@ public:  // /////////////////////// Getters & Setters //////////////////////////
 
 
 public:  // ///////////////////////// Public Methods ///////////////////////////
-   void         buyAllLotteryTickets();
-   void         makeWinningDraw();
-   unsigned int countWinningTickets() const;
+   void          buyAllLotteryTickets();
+   void          makeWinningDraw();
+   unsigned long countWinningTickets() const;
 
    bool validate() const;
    void dump()     const;

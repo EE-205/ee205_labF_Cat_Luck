@@ -237,7 +237,7 @@ void Game::buyAllLotteryTickets() {
    /// Put the first lottery ticket in #Game.bstHead
    bstHead = new Node( *this );
 
-   unsigned int progress = showProgress;
+   unsigned long progress = showProgress;
 
    for( unsigned long i = 1 ; i < tickets ; i++ ) {
       Node* ticket = new Node( *this );
@@ -258,7 +258,7 @@ void Game::buyAllLotteryTickets() {
 /// Get the number of winning tickets in the Game
 ///
 /// @return The number of winning tickets (matching Draw objects) in the Game
-unsigned int Game::countWinningTickets() const {
+unsigned long Game::countWinningTickets() const {
    if( winningDraw == nullptr ) {
       /// @throws logic_error Attempt to count winning tickets before drawing the winning ticket
       throw logic_error("Attempt to count winning tickets before drawing the winning ticket");
