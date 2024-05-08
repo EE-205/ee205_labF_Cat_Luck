@@ -19,7 +19,7 @@
 
 /// Represents one Draw in a Game
 ///
-/// A Draw may be one of many tickets purchased by customers, or it may be the
+/// A Draw may be one of many tickets purchased by customers or it may be the
 /// one winning Draw of the Game
 class Draw {
 private:  // /////////////////////// Private Members ///////////////////////////
@@ -27,12 +27,13 @@ private:  // /////////////////////// Private Members ///////////////////////////
 
 
 protected:  // //////////////////// Protected Members //////////////////////////
-   /// The sorted set of numbers in the draw
+   /// The sorted set of numbers in the Draw
+   ///
    /// These are protected, so unit tests can derive and set them
    union alignas( 8 ) {
-      uint8_t  each[ MAX_DRAWS   ];  ///< Each individual draw
-      uint64_t   g8[ MAX_DRAWS/8 ];  ///< A group of 8 draws
-   } draw;  ///< The sorted set of numbers in the draw
+      uint8_t  each[ MAX_DRAWS   ];  ///< Each individual Draw
+      uint64_t   g8[ MAX_DRAWS/8 ];  ///< A group of 8 Draws
+   } draw;  ///< The sorted set of numbers in the Draw
 
 
 public:  // ///////////////////////// Static Methods ///////////////////////////

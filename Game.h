@@ -19,8 +19,7 @@
 
 
 /// Represents a single Lottery game.  Once the initial parameters of the game
-/// are established, they can't be changed.  The game, however, can be played
-/// repeatedly.
+/// are established, they can't be changed.
 class Game {
 private:  // /////////////////////// Private Class ///////////////////////////
 
@@ -29,7 +28,7 @@ private:  // /////////////////////// Private Class ///////////////////////////
    /// If a Game has multiple tickets with the same Draw, count indicates how
    /// many
    class Node : public Draw {
-   friend Game;  ///< The Game class is a friend of Node @todo Test this when finished
+   friend Game;  ///< The Game class is a friend of Node
 
    private:  // ///////////////////// Private Members /////////////////////////
       Node*        left;   ///< The left tree
@@ -73,6 +72,18 @@ private:  // /////////////////////// Private Class ///////////////////////////
       }
 
       /// Dump a single Node
+      ///
+      /// Sample output:
+      ///
+      ///     Object              class               Game::Node
+      ///     Object              this                0x601eb437c900
+      ///     Node                count               1
+      ///     Node                left                0
+      ///     Node                right               0
+      ///     Object              class               Draw
+      ///     Object              this                0x601eb437c900
+      ///     Draw                draw                 22  49  56  61  62
+      ///
       void dump() {
          PRINT_CLASS_FOR_DUMP();
          FORMAT_LINE_FOR_DUMP( "Node", "count" ) << count << '\n' ;
@@ -146,7 +157,7 @@ public:
    unsigned long getShowProgress() const;
 
    void setShowProgress(unsigned long showProgress);
-   ///< During buyAllLotteryTickets(), print a `.` every `showProgress` draws.  If `0`, then don't show any progress.
+   ///< During buyAllLotteryTickets(), print a `.` every #Game::showProgress draws.  If `0`, then don't show any progress.
 
 public:  // ///////////////////////// Static Methods ///////////////////////////
    static bool validateBalls( uint8_t newBalls );

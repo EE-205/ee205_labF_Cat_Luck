@@ -37,8 +37,8 @@ Draw::Draw( const Game& newGame ) : game( newGame ) {
    /// a sorted set of numbers.  We will use a radix sort to select a set of
    /// balls out of a pool.
 
-   alignas( 8 ) uint8_t pool[ MAX_BALLS ];  ///< Numbers to draw from
-   memset( pool, 0, sizeof( pool ) );       //   0 means they number/ball is in the pool
+   alignas( 8 ) uint8_t pool[ MAX_BALLS ];  // Numbers to draw from
+   memset( pool, 0, sizeof( pool ) );       // 0 means they number/ball is in the pool
 
    const uint8_t balls = newGame.getBalls();
 
@@ -47,16 +47,16 @@ Draw::Draw( const Game& newGame ) : game( newGame ) {
       /// - If that index has been drawn (pool[r] != 0, iterate forward
       ///   (wrap if necessary) until an unused number (== 0) is found.
       uint8_t randIndex = getRandom8( balls );
-//    printf( "r %d  ", randIndex );
+      // printf( "r %d  ", randIndex );
 
       while( pool[ randIndex ] != 0 ) {
-//       printf( "pool[%d]=%d  ", randIndex, pool[randIndex] );
+         // printf( "pool[%d]=%d  ", randIndex, pool[randIndex] );
          randIndex = ( (randIndex+1) >= balls ) ? 0 : (randIndex + 1);
-//       printf( "randIndex %d  ", randIndex );
+         // printf( "randIndex %d  ", randIndex );
       }
       assert( pool[ randIndex ] == 0 );
       pool[ randIndex ] = 1;
-//    printf( "Draw randIndex: %d  balls: %d\n", randIndex, balls );
+      // printf( "Draw randIndex: %d  balls: %d\n", randIndex, balls );
    }
 
    int found = 0;
@@ -78,20 +78,22 @@ Draw::Draw( const Draw& rhs_draw ) : game{ rhs_draw.game }, draw { rhs_draw.draw
 
 /// Get a random number from 0 to the number of balls in the Lottery
 ///
+/// If there are 10 balls in the lottery, this will return values from 0 to 9
+///
 /// @param balls The number of balls in the Game
 ///
-/// @return An 8-bit random number
+/// @return An 8-bit random number between `0` and `balls-1`
 uint8_t Draw::getRandom8( uint8_t balls ) {
    uint8_t rval;
 
    asm volatile (
        "try_again:"
-       "rdrand ax;"           /// If CF==0, then the rdrand failed... try again
-       "jnc    try_again;"
-       "AND    ax, 0x00FF;"   // Ensure the random number is <= 255
-       "mov    cl, %[balls];"
-       "div    cl;"           // Use integer division
-       "mov    %[rval], ah;"  // Return the modulus (remainder) of the division
+          "RDRAND AX;"           /// If `CF==0`, then the `RDRAND` failed... try again
+          "JNC    try_again;"
+          "AND    AX, 0x00FF;"   // Ensure the random number is <= 255
+          "MOV    CL, %[balls];"
+          "DIV    CL;"           // Use integer division
+          "MOV    %[rval], AH;"  // Return the modulus (remainder) of the division
       :[rval] "=r" ( rval )   // Output
       :[balls] "r" ( balls )  // Input
       :"ax", "cl", "cc"   );  // Clobbers
@@ -100,11 +102,11 @@ uint8_t Draw::getRandom8( uint8_t balls ) {
 }
 
 
-/// Validate that the compiler is compatible with the assumptions
-/// Draw makes about data sizes.  This really only needs to be run once.
+/// Ensure the compiler is compatible with the assumptions
+/// Draw makes about data sizes.  This only needs to be run once.
 ///
 /// Like the other `validate` functions, it either returns `true` or raises
-/// an exception (in this case, it fails an assert()).
+/// an exception (in this case, it fails an `assert()`).
 ///
 /// @return `true` if Draw's data structure will compile and work correctly.
 bool Draw::validate_static() {
@@ -114,7 +116,7 @@ bool Draw::validate_static() {
 }
 
 
-/// Validate the internal state of the Draw
+/// Validate the internal state of Draw
 ///
 /// @return `true` if the state is valid.  If not, throw an exception.
 bool Draw::validate() const {
@@ -173,7 +175,7 @@ void Draw::dump() const {
 Draw& Draw::operator = ( const Draw& rhs_draw ) {
    assert( &game == &rhs_draw.game );  /// Assert that the two Draw objects come from the same Game
 
-   /// Protect against self-copy
+   /// This protects against self-copy
    if (this == &rhs_draw ) {
       return *this;
    }

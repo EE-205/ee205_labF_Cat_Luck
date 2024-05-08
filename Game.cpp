@@ -80,7 +80,9 @@ bool Game::validateDraws( const uint8_t newBalls, const uint8_t newDraws ) {
 /// Validate the number of tickets in the Game
 ///
 /// This is actually bounds-checked by the datatype... The minimum number is
-/// 1 and the maximum number is ULONG_MAX.
+/// 1 and the maximum number is `ULONG_MAX`.
+///
+/// @see https://en.cppreference.com/w/c/types/limits
 ///
 /// @param newTickets The proposed number of tickets issued in this Game
 /// @return `true` if `newTickets` is acceptable
@@ -151,8 +153,8 @@ void Game::setShowProgress( unsigned long showProgress ) {
 /// Draw a special ticket
 void Game::makeWinningDraw() {
    if( winningDraw != nullptr ) {
-      /// @throws logic_error Attempt to repeat a winning draw.  Each Game gets only one draw.
-      throw logic_error( "Attempt to repeat a winning draw.  Each Game gets only one draw!" );
+      /// @throws logic_error Attempt to repeat a winning draw.  Each game gets only one draw.
+      throw logic_error( "Attempt to repeat a winning draw.  Each game gets only one draw!" );
    }
    winningDraw = new Draw( *this );
 };
@@ -214,7 +216,8 @@ void Game::dump() const {
 }
 
 
-/// Make a random Draw for each lottery ticket and store it in a data structure
+/// Make a random Draw for each lottery ticket and store it in a Binary Search
+/// Tree (BST)
 void Game::buyAllLotteryTickets() {
    assert( validate() );
 
