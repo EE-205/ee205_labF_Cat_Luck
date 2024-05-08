@@ -21,21 +21,31 @@ using namespace std;
 ///
 /// @return The return value for the program
 int main() {
-   unsigned int  numRuns    =         52;  // One draw per week for 1 year
+   const unsigned int  numRuns      =     3 * 52;  /// - Three draws per week for 1 year
+   const unsigned long showProgress =      50000;  /// - Print a `.` after this many tickets drawn
+   const unsigned long numTickets   =   21417741;  /// - The size of an average PowerBall drawing:  https://lottoreport.com/ticketcomparison.htm
+   const int           numBalls     =         69;  /// - Powerball balls range from 1 to 69
+   const int           numDraws     =          5;  /// - Powerball draws 5 balls per game
 
-   unsigned long numTickets =  132000000;  // The size of a large PowerBall drawing
-   int           numBalls   =         69;  // Powerball balls range from 1 to 69
-   int           numDraws   =          5;  // Powerball draws 5 balls per game
+   unsigned long       numWinners   =          0;  //  Accumulate the number of winners here
 
-   unsigned long numWinners =          0;  // Accumulate the number of winners here
+   cout << "Game"
+        << "  balls: "   << numBalls
+        << "  draws: "   << numDraws
+        << "  tickets: " << numTickets
+        << "  runs: "    << numRuns
+        << '\n';
 
    for( unsigned int i = 0 ; i < numRuns ; i++ ) {
       Game aGame = Game( numBalls, numDraws, numTickets );
-      aGame.setShowProgress( 50000 );
+      aGame.setShowProgress( showProgress );
       aGame.buyAllLotteryTickets();
       aGame.makeWinningDraw();
+      // aGame.dump();
       numWinners += aGame.countWinningTickets();
-      cout << '\n';
+      if( showProgress != 0 ) {
+         cout << '\n';
+      }
    }
 
    cout.imbue( locale("") );  // Print numbers with commas
