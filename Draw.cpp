@@ -38,6 +38,7 @@ Draw::Draw( const Game& newGame ) : game( newGame ) {
    /// balls out of a pool.
 
    alignas( 8 ) uint8_t pool[ MAX_BALLS ];  // Numbers to draw from
+   /// @API{ memset, https://en.cppreference.com/w/cpp/string/byte/memset }
    memset( pool, 0, sizeof( pool ) );       // 0 means they number/ball is in the pool
 
    const uint8_t balls = newGame.getBalls();
@@ -86,6 +87,10 @@ Draw::Draw( const Draw& rhs_draw ) : game{ rhs_draw.game }, draw { rhs_draw.draw
 uint8_t Draw::getRandom8( const uint8_t balls ) {
    uint8_t rval;
 
+   /// @API{ RDRAND, https://www.felixcloutier.com/x86/rdrand }
+
+   /// @API{ DIV, https://www.felixcloutier.com/x86/div }
+
    asm volatile (
        "try_again:"
           "RDRAND AX;"           /// If `CF==0`, then the `RDRAND` failed... try again
@@ -110,6 +115,7 @@ uint8_t Draw::getRandom8( const uint8_t balls ) {
 ///
 /// @return `true` if Draw's data structure will compile and work correctly.
 bool Draw::validate_static() {
+   /// @API{ static_assert, https://en.cppreference.com/w/cpp/language/static_assert }
    static_assert( MAX_BALLS <= UCHAR_MAX );
 
    return true;
@@ -156,6 +162,7 @@ void Draw::dump() const {
    PRINT_CLASS_FOR_DUMP();
    /// We choose not to print the entire Game each time we print a Draw
 
+   /// @API{ ostringstream, https://en.cppreference.com/w/cpp/io/basic_ostringstream }
    ostringstream stringBuffer;
    for( int i = 0 ; i < game.getDraws() ; i++ ) {
       stringBuffer << setfill( ' ' );

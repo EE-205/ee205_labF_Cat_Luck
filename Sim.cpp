@@ -10,6 +10,7 @@
 /// @author TODO <TODO@hawaii.edu>
 ///////////////////////////////////////////////////////////////////////////////
 
+#include <cassert>   // For assert
 #include <iostream>  // For cout
 #include <locale>    // For locale
 
