@@ -44,6 +44,7 @@ lint:
 	$(LINT) $(LINTFLAGS) Game.cpp Draw.cpp Sim.cpp --
 
 doc: $(TARGET)
+	./.doxygen/stats.py
 	rsync --recursive --mkpath --checksum --delete --compress --stats --chmod=o+r,Do+x .doxygen/images .doxygen/docs/html/.doxygen
 	doxygen .doxygen/Doxyfile
 
