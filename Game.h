@@ -90,7 +90,7 @@ private:  // /////////////////////// Private Class ///////////////////////////
       void dump() {
          PRINT_CLASS_FOR_DUMP();
          FORMAT_LINE_FOR_DUMP( "Node", "count" ) << count << '\n' ;
-         FORMAT_LINE_FOR_DUMP( "Node", "left" ) << left << '\n' ;
+         FORMAT_LINE_FOR_DUMP( "Node", "left" )  << left  << '\n' ;
          FORMAT_LINE_FOR_DUMP( "Node", "right" ) << right << '\n' ;
          Draw::dump();
       }
