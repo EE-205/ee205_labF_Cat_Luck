@@ -49,6 +49,7 @@ This simulation uses the following `Makefile` targets:
 | `make debug`         | Compile with debug mode ( `DEBUG` is defined)                  |
 | `make clean`         | Remove all compiler-generated files                            |
 | `make doc`           | Make a Doxygen website                                         |
+| `make publish`       | Publish a Doxygen website                                      |
 | `make lint`          | Use `clang-tidy` to do static analysis on the source code      |
 | `make valgrind`      | Use `valgrind` to do dynamic analysis on a run                 |
 | `make test-valgrind` | Use `valgrind` to do dynamic analysis on a Boost unit test run |
