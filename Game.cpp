@@ -255,9 +255,7 @@ unsigned int Game::countWinningTickets() const {
       throw logic_error("Attempt to count winning tickets before buying tickets");
    }
 
-   Node *aNode = head->getNode(*winningDraw);
-   if (aNode == nullptr) {
-   Node *aNode = head->getNode( *winningDraw );
+   Node* aNode = head->getNode( *winningDraw );
    if( aNode == nullptr ) {
       return 0;
    }
