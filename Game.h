@@ -72,14 +72,21 @@ private:  // /////////////////////// Private Class ///////////////////////////
          }
       }
 
+      /// Dump a single Node
+      void dump() {
+         PRINT_CLASS_FOR_DUMP();
+         FORMAT_LINE_FOR_DUMP( "Node", "count" ) << count << '\n' ;
+         FORMAT_LINE_FOR_DUMP( "Node", "left" ) << left << '\n' ;
+         FORMAT_LINE_FOR_DUMP( "Node", "right" ) << right << '\n' ;
+         Draw::dump();
+      }
+
       /// Dump the Node objects using a BST in-order traversal
       void dumpInOrder() {
          if( left != nullptr ) {
             left->dumpInOrder();
          }
-         Draw::dump();
-//       PRINT_CLASS_FOR_DUMP();
-         FORMAT_LINE_FOR_DUMP( "Node", "count" ) << count << '\n' ;
+         Node::dump();
          if( right != nullptr ) {
             right->dumpInOrder();
          }
